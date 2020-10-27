@@ -24,6 +24,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+	linkExactActiveClass: 'bg-gray-700',
 	routes
 })
 
