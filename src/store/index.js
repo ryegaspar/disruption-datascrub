@@ -8,7 +8,7 @@ import * as getters from './getters'
 import * as mutations from './mutations'
 import * as actions from './actions'
 
-import file_info from './modules/file_info'
+import excel from './modules/excel'
 
 export default new Vuex.Store({
 	state,
@@ -16,6 +16,6 @@ export default new Vuex.Store({
 	mutations,
 	actions,
 	modules: {
-		file_info
+		excel
 	}
 })

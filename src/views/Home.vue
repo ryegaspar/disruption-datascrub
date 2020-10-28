@@ -24,7 +24,7 @@ import {mapGetters, mapActions} from 'vuex'
 export default {
     methods: {
         ...mapActions({
-            readExcel: 'file_info/readFile'
+            readExcel: 'excel/readFile'
         }),
 
         readXlsx(obj) {
@@ -38,7 +38,7 @@ export default {
 
     computed: {
         ...mapGetters({
-            filename: 'file_info/filename'
+            filename: 'excel/filename'
         })
     }
 }
