@@ -12,24 +12,22 @@ export const readFile = ({commit, dispatch}, file) => {
 
 		wb.xlsx.load(buffer).then(workbook => {
 			workbook.worksheets[0].getRow(1).eachCell((cell, index) => {
-				headers.push(cell.value)
+				headers.push(cell.value.toLowerCase())
 			})
+			commit('SET_HEADERS', headers)
 
 			let rowCount = workbook.worksheets[0].rowCount
 			commit('SET_NUM_OF_ROWS',  rowCount - 1)
 
 			let data = []
 			for (let x = 2; x <= rowCount; x++) {
-				let celldata = []
+				let celldata = {}
 				workbook.worksheets[0].getRow(x).eachCell({includeEmpty: true},(cell, index) => {
-					celldata.push(cell.value)
+					celldata[headers[index - 1]] = cell.value
 				})
 				data.push(celldata)
 			}
-
 			commit('SET_DATA', data)
 		})
-
-		commit('SET_HEADERS', headers)
 	}
 }

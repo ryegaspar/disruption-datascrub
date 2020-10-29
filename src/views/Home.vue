@@ -12,7 +12,7 @@
             <p class="mb-4">File Info</p>
             <p>Filename: <span class="text-gray-300">{{ filename }}</span></p>
             <p>Path: <span class="text-gray-300">{{ filePath }}</span></p>
-            <p>Headers: <span class="text-gray-300">{{ headers.join(', ').toLowerCase() }}</span></p>
+            <p>Headers: <span class="text-gray-300">{{ headers.join(', ') }}</span></p>
             <p>Number of Data (rows): <span class="text-gray-300">{{ dataRows }}</span></p>
         </div>
     </div>
