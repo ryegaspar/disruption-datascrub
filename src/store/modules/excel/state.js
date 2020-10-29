@@ -3,5 +3,5 @@ export default {
 	filename: '',
 	filePath: '',
 	headers: [],
-	rows: 0
+	dataRows: 0
 }

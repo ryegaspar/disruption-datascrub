@@ -11,9 +11,9 @@
         <div class="text-gray-600">
             <p class="mb-4">File Info</p>
             <p>Filename: <span class="text-gray-300">{{ filename }}</span></p>
-            <p>Path: </p>
-            <p>Headers: </p>
-            <p>Number of Rows: </p>
+            <p>Path: <span class="text-gray-300">{{ filePath }}</span></p>
+            <p>Headers: <span class="text-gray-300">{{ headers.join(', ').toLowerCase() }}</span></p>
+            <p>Number of Data (rows): <span class="text-gray-300">{{ dataRows }}</span></p>
         </div>
     </div>
 </template>
@@ -38,8 +38,11 @@ export default {
 
     computed: {
         ...mapGetters({
-            filename: 'excel/filename'
-        })
+            filename: 'excel/filename',
+            filePath: 'excel/filePath',
+            headers: 'excel/headers',
+            dataRows: 'excel/dataRows'
+        }),
     }
 }
 </script>

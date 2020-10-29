@@ -2,4 +2,4 @@ export const file = (state) => state.file
 export const filename = (state) => state.filename
 export const filePath = (state) => state.filePath
 export const headers = (state) => state.headers
-export const row = (state) => state.rows
+export const dataRows = (state) => state.dataRows
