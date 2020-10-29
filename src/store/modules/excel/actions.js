@@ -15,7 +15,19 @@ export const readFile = ({commit, dispatch}, file) => {
 				headers.push(cell.value)
 			})
 
-			commit('SET_NUM_OF_ROWS', workbook.worksheets[0].rowCount - 1)
+			let rowCount = workbook.worksheets[0].rowCount
+			commit('SET_NUM_OF_ROWS',  rowCount - 1)
+
+			let data = []
+			for (let x = 2; x <= rowCount; x++) {
+				let celldata = []
+				workbook.worksheets[0].getRow(x).eachCell({includeEmpty: true},(cell, index) => {
+					celldata.push(cell.value)
+				})
+				data.push(celldata)
+			}
+
+			commit('SET_DATA', data)
 		})
 
 		commit('SET_HEADERS', headers)

@@ -1,5 +1,6 @@
 export default {
 	file: null,
+	data: [],
 	filename: '',
 	filePath: '',
 	headers: [],

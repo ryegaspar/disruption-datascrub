@@ -11,3 +11,7 @@ export const SET_HEADERS = (state, headers) => {
 export const SET_NUM_OF_ROWS = (state, numOfRows) => {
 	state.dataRows = numOfRows
 }
+
+export const SET_DATA = (state, data) => {
+	state.data = data
+}
