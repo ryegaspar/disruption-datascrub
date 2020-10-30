@@ -37,8 +37,6 @@
             >
                 Add 2
             </button>
-        </div>
-        <div class="flex mt-3">
             <button
                 class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
                 @click.prevent="selected='city'"
@@ -63,6 +61,8 @@
             >
                 Claims
             </button>
+        </div>
+        <div class="flex mt-3">
             <button
                 class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
                 @click.prevent="selected='claimants'"
@@ -75,8 +75,6 @@
             >
                 Procedures
             </button>
-        </div>
-        <div class="flex mt-3">
             <button
                 class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
                 @click.prevent="selected='billed'"
@@ -123,21 +121,26 @@
             <div v-if="selected === 'name'">
                 <name />
             </div>
+            <div v-if="selected === 'network3'">
+                <network3 />
+            </div>
         </div>
     </div>
 </template>
 <script>
-import Tin from '@/components/table_components/Tin'
-import Npi from '@/components/table_components/Npi'
-import Facility from '@/components/table_components/Facility'
-import Name from '@/components/table_components/Name'
+import Tin from '@/components/table_configuration/Tin'
+import Npi from '@/components/table_configuration/Npi'
+import Facility from '@/components/table_configuration/Facility'
+import Name from '@/components/table_configuration/Name'
+import Network3 from "@/components/table_configuration/Network3";
 
 export default {
     components: {
         Tin,
         Npi,
         Facility,
-        Name
+        Name,
+        Network3
     },
     data() {
         return {
