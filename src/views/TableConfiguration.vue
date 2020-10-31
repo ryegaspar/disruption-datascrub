@@ -109,20 +109,22 @@
 
         <hr class="border-b-2 border-gray-900 mt-6 mb-2">
         <div class="text-gray-600">
-            <div v-if="selected === 'tin'">
-                <tin />
+            <div v-show="selected === 'tin'">
+                <keep-alive>
+                    <tin/>
+                </keep-alive>
             </div>
-            <div v-if="selected === 'npi'">
-                <npi />
+            <div v-show="selected === 'npi'">
+                <npi/>
             </div>
-            <div v-if="selected === 'facility'">
-                <facility />
+            <div v-show="selected === 'facility'">
+                <facility/>
             </div>
-            <div v-if="selected === 'name'">
-                <name />
+            <div v-show="selected === 'name'">
+                <name/>
             </div>
-            <div v-if="selected === 'network3'">
-                <network3 />
+            <div v-show="selected === 'network3'">
+                <network3/>
             </div>
         </div>
     </div>

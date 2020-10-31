@@ -12,6 +12,7 @@
 	},
 	"main": "background.js",
 	"dependencies": {
+		"@tailwindui/vue": "0.1.0-alpha.2",
 		"exceljs": "^4.1.1",
 		"tailwindcss": "^1.9.6",
 		"vue": "^2.6.11",

@@ -3,6 +3,12 @@
         <div>TIN</div>
         <div class="mt-4">
             <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <!-- tailwindui -->
+                <list-box :selected="selected"
+                          :options="options"
+                          @input="updateSelected"
+                />
+                <!-- end tailwindui -->
                 <!-- new -->
                 <div class="sm:col-span-2">
                     <div class="space-y-1">
@@ -16,7 +22,7 @@
                                 >
                                     <span class="block truncate">Tom Cook</span>
                                     <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="none"
+                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none"
                                              stroke="currentColor">
                                             <path d="M7 7l3-3 3 3m0 6l-3 3-3-3" stroke-width="1.5"
                                                   stroke-linecap="round" stroke-linejoin="round"/>
@@ -165,6 +171,41 @@
         </div>
     </div>
 </template>
+
 <script>
-export default {}
+import ListBox from "@/components/form/ListBox";
+export default {
+    components: {
+        ListBox
+    },
+
+    data() {
+        return {
+            selected: null,
+            options: [
+                "starcraft 2",
+                "warcraft 3",
+                "prisoner of azkabhan",
+                "some random",
+                "hello",
+                "ryan",
+                "jane",
+                "john",
+                "ibrahim",
+                "kadaffi",
+                "serral",
+                "reynor",
+                "clem",
+                "trap",
+                "the quick brown fox jumps over"
+            ]
+        }
+    },
+
+    methods: {
+        updateSelected(value) {
+            this.selected = value
+        }
+    }
+}
 </script>
