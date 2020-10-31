@@ -12,21 +12,15 @@
                 </div>
             </div>
         </div>
-        <!--        <div id="nav">-->
-        <!--            <router-link to="/">Home</router-link>-->
-        <!--            |-->
-        <!--            <router-link to="/about">About</router-link>-->
-        <!--        </div>-->
-        <!--        <router-view/>-->
     </div>
 </template>
 
 <script>
-import SideBar from "@/components/SideBar";
+import SideBar from "@/components/SideBar"
 
 export default {
     components: {
-        SideBar
+        SideBar,
     }
 }
 </script>

@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
 import { mapActions } from 'vuex'
 
 export default {
@@ -60,10 +59,6 @@ export default {
             required: true,
             type: Array
         }
-    },
-
-    components: {
-        Multiselect
     },
 
     data() {
