@@ -26,9 +26,10 @@
                            value="text-right"
                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
                            name="format"
+                           id="text-right"
                            v-model="format"
                     >
-                    <label for="push_everything" class="ml-3">
+                    <label for="text-right" class="ml-3">
                         <span class="block text-sm leading-5 font-medium text-gray-700">Default (Right-9)</span>
                     </label>
                 </div>
@@ -37,9 +38,10 @@
                            value="text-left"
                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
                            name="format"
+                           id="text-left"
                            v-model="format"
                     >
-                    <label for="push_email" class="ml-3">
+                    <label for="text-left" class="ml-3">
                         <span class="block text-sm leading-5 font-medium text-gray-700">Left-9</span>
                     </label>
                 </div>
