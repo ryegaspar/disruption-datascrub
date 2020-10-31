@@ -4,10 +4,13 @@
         <div class="mt-4">
             <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                 <!-- tailwindui -->
-                <list-box :selected="selected"
-                          :options="options"
-                          @input="updateSelected"
-                />
+                <div class="col-span-2">
+                    <list-box :selected="selected"
+                              :options="options"
+                              list-label="Value:"
+                              @input="updateSelected"
+                    />
+                </div>
                 <!-- end tailwindui -->
                 <!-- new -->
                 <div class="sm:col-span-2">
