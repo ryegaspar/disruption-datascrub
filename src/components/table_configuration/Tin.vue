@@ -2,190 +2,75 @@
     <div>
         <div>TIN</div>
         <div class="mt-4">
-            <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                <!-- tailwindui -->
+            <div class="grid gap-y-6 gap-x-4 grid-cols-6">
                 <div class="col-span-2">
-                    <list-box :selected="selected"
-                              :options="options"
-                              list-label="Value:"
-                              @input="updateSelected"
+                    <label>
+                        column value:
+                    </label>
+                    <multiselect v-model="mselected"
+                                 :options="moptions"
+                                 placeholder="select column value"
+                                 class="mt-2 -ml-1"
                     />
-                </div>
-                <!-- end tailwindui -->
-                <!-- new -->
-                <div class="sm:col-span-2">
-                    <div class="space-y-1">
-                        <label id="listbox-label" class="block text-sm leading-5 font-medium text-gray-700">
-                            Assigned to
-                        </label>
-                        <div class="relative">
-                            <span class="inline-block w-full rounded-md shadow-sm">
-                                <button type="button"
-                                        class="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                >
-                                    <span class="block truncate">Tom Cook</span>
-                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none"
-                                             stroke="currentColor">
-                                            <path d="M7 7l3-3 3 3m0 6l-3 3-3-3" stroke-width="1.5"
-                                                  stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                </button>
-                            </span>
-
-                            <!--
-                              Select popover, show/hide based on select state.
-
-                              Entering: ""
-                                From: ""
-                                To: ""
-                              Leaving: "transition ease-in duration-100"
-                                From: "opacity-100"
-                                To: "opacity-0"
-                            -->
-                            <div class="absolute mt-1 w-full rounded-md bg-white shadow-lg">
-                                <ul tabindex="-1"
-                                    class="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"
-                                >
-                                    <!--
-                                      Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-                                      Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
-                                    -->
-                                    <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9">
-                                        <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
-                                        <span class="font-normal block truncate">
-                                            Wade Cooper
-                                        </span>
-                                        <!--
-                                          Checkmark, only display for selected option.
-
-                                          Highlighted: "text-white", Not Highlighted: "text-indigo-600"
-                                        -->
-                                        <span class="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
-                                            <!-- Heroicon name: check -->
-                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                 fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                      clip-rule="evenodd"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <!-- More options... -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end new -->
-                <div class="sm:col-span-2">
-                    <label for="country" class="block text-sm font-medium leading-5 text-gray-700">
-                        Country / Region
-                    </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <select id="country"
-                                class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="sm:col-span-6">
-                    <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700">
-                        Street address
-                    </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input id="street_address"
-                               class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                    </div>
-                </div>
-
-                <div class="sm:col-span-2">
-                    <label for="city" class="block text-sm font-medium leading-5 text-gray-700">
-                        City
-                    </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input id="city"
-                               class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                    </div>
-                </div>
-
-                <div class="sm:col-span-2">
-                    <label for="state" class="block text-sm font-medium leading-5 text-gray-700">
-                        State / Province
-                    </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input id="state"
-                               class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                    </div>
-                </div>
-
-                <div class="sm:col-span-2">
-                    <label for="zip" class="block text-sm font-medium leading-5 text-gray-700">
-                        ZIP / Postal
-                    </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input id="zip"
-                               class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="mt-8 border-t border-gray-200 pt-8">
-            <div class="mt-6">
-                <fieldset class="mt-6">
-                    <legend class="text-base font-medium text-gray-900">
-                        Push Notifications
-                    </legend>
-                    <p class="text-sm leading-5 text-gray-500">These are delivered via SMS to your mobile
-                        phone.</p>
-                    <div class="mt-4">
-                        <div class="flex items-center">
-                            <input id="push_everything" name="push_notifications" type="radio"
-                                   class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                            <label for="push_everything" class="ml-3">
-                                            <span
-                                                class="block text-sm leading-5 font-medium text-gray-700">Everything</span>
-                            </label>
-                        </div>
-                        <div class="mt-4 flex items-center">
-                            <input id="push_email" name="push_notifications" type="radio"
-                                   class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                            <label for="push_email" class="ml-3">
-                                        <span
-                                            class="block text-sm leading-5 font-medium text-gray-700">Same as email</span>
-                            </label>
-                        </div>
-                        <div class="mt-4 flex items-center">
-                            <input id="push_nothing" name="push_notifications" type="radio"
-                                   class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                            <label for="push_nothing" class="ml-3">
-                                <span
-                                    class="block text-sm leading-5 font-medium text-gray-700">No push notifications</span>
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
+        <div class="mt-4">
+            <legend class="">
+                action:
+            </legend>
+            <div class="mt-2">
+                <div class="flex items-center">
+                    <input type="radio"
+                           value="text-right"
+                           class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                    <label for="push_everything" class="ml-3">
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Default (Text, Right, 9)</span>
+                    </label>
+                </div>
+                <div class="mt-2 flex items-center">
+                    <input type="radio"
+                           value="text-left"
+                           class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                    <label for="push_email" class="ml-3">
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Text, Left, 9</span>
+                    </label>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import ListBox from "@/components/form/ListBox";
+import Multiselect from 'vue-multiselect'
+
 export default {
     components: {
-        ListBox
+        Multiselect
     },
 
     data() {
         return {
             selected: null,
             options: [
+                "starcraft 2",
+                "warcraft 3",
+                "prisoner of azkabhan",
+                "some random",
+                "hello",
+                "ryan",
+                "jane",
+                "john",
+                "ibrahim",
+                "kadaffi",
+                "serral",
+                "reynor",
+                "clem",
+                "trap",
+                "the quick brown fox jumps over"
+            ],
+            mselected: null,
+            moptions: [
                 "starcraft 2",
                 "warcraft 3",
                 "prisoner of azkabhan",
@@ -212,3 +97,30 @@ export default {
     }
 }
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style>
+.multiselect__tag {
+    @apply bg-indigo-400 text-gray-800
+}
+
+.multiselect__input {
+    @apply bg-black text-gray-400
+}
+
+.multiselect__tags {
+    @apply bg-black border-gray-700
+}
+
+.multiselect__single {
+    @apply bg-black text-gray-400
+}
+
+.multiselect__content-wrapper {
+    @apply bg-black border-gray-700
+}
+
+.multiselect__option--selected {
+    @apply bg-indigo-400 text-gray-800
+}
+</style>
