@@ -2,7 +2,8 @@
     <div class="home">
         <div class="flex">
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
+                :class="{'bg-green-500': tin.column !== null, 'bg-indigo-400': tin.column === null}"
                 @click.prevent="selected='tin'"
             >
                 TIN
@@ -82,25 +83,25 @@
                 Billed
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 whitespace-no-wrap focus:outline-none"
                 @click.prevent="selected='adacode'"
             >
                 ADA Code
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 whitespace-no-wrap focus:outline-none"
                 @click.prevent="selected='network1'"
             >
                 Network 1
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 whitespace-no-wrap focus:outline-none"
                 @click.prevent="selected='network2'"
             >
                 Network 2
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 whitespace-no-wrap focus:outline-none"
                 @click.prevent="selected='network3'"
             >
                 Network 3
@@ -110,9 +111,7 @@
         <hr class="border-b-2 border-gray-900 mt-6 mb-2">
         <div class="text-gray-600">
             <div v-show="selected === 'tin'">
-                <keep-alive>
-                    <tin/>
-                </keep-alive>
+                <tin :headers="headers"/>
             </div>
             <div v-show="selected === 'npi'">
                 <npi/>
@@ -136,6 +135,8 @@ import Facility from '@/components/table_configuration/Facility'
 import Name from '@/components/table_configuration/Name'
 import Network3 from "@/components/table_configuration/Network3";
 
+import {mapGetters} from 'vuex'
+
 export default {
     components: {
         Tin,
@@ -144,10 +145,18 @@ export default {
         Name,
         Network3
     },
+
     data() {
         return {
             selected: 'tin'
         }
     },
+
+    computed: {
+        ...mapGetters({
+            headers: 'excel/headers',
+            tin: 'table_configurations/tin'
+        })
+    }
 }
 </script>

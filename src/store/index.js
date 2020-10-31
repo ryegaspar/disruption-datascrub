@@ -9,6 +9,7 @@ import * as mutations from './mutations'
 import * as actions from './actions'
 
 import excel from './modules/excel'
+import table_configurations from './modules/table_configurations'
 
 export default new Vuex.Store({
 	state,
@@ -16,6 +17,7 @@ export default new Vuex.Store({
 	mutations,
 	actions,
 	modules: {
-		excel
+		excel,
+		table_configurations
 	}
 })

@@ -7,33 +7,40 @@
                     <label>
                         column value:
                     </label>
-                    <multiselect v-model="mselected"
-                                 :options="moptions"
+                    <multiselect :value="tinColumn"
+                                 :options="headers"
                                  placeholder="select column value"
                                  class="mt-2 -ml-1"
+                                 @input="updateTin"
                     />
                 </div>
             </div>
         </div>
         <div class="mt-4">
             <legend class="">
-                action:
+                format:
             </legend>
             <div class="mt-2">
                 <div class="flex items-center">
                     <input type="radio"
                            value="text-right"
-                           class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                           class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                           name="format"
+                           v-model="format"
+                    >
                     <label for="push_everything" class="ml-3">
-                        <span class="block text-sm leading-5 font-medium text-gray-700">Default (Text, Right, 9)</span>
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Default (Right-9)</span>
                     </label>
                 </div>
                 <div class="mt-2 flex items-center">
                     <input type="radio"
                            value="text-left"
-                           class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                           class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                           name="format"
+                           v-model="format"
+                    >
                     <label for="push_email" class="ml-3">
-                        <span class="block text-sm leading-5 font-medium text-gray-700">Text, Left, 9</span>
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Left-9</span>
                     </label>
                 </div>
             </div>
@@ -43,8 +50,16 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
+import { mapActions } from 'vuex'
 
 export default {
+    props: {
+        headers: {
+            required: true,
+            type: Array
+        }
+    },
+
     components: {
         Multiselect
     },
@@ -52,47 +67,30 @@ export default {
     data() {
         return {
             selected: null,
-            options: [
-                "starcraft 2",
-                "warcraft 3",
-                "prisoner of azkabhan",
-                "some random",
-                "hello",
-                "ryan",
-                "jane",
-                "john",
-                "ibrahim",
-                "kadaffi",
-                "serral",
-                "reynor",
-                "clem",
-                "trap",
-                "the quick brown fox jumps over"
-            ],
-            mselected: null,
-            moptions: [
-                "starcraft 2",
-                "warcraft 3",
-                "prisoner of azkabhan",
-                "some random",
-                "hello",
-                "ryan",
-                "jane",
-                "john",
-                "ibrahim",
-                "kadaffi",
-                "serral",
-                "reynor",
-                "clem",
-                "trap",
-                "the quick brown fox jumps over"
-            ]
         }
     },
 
     methods: {
-        updateSelected(value) {
-            this.selected = value
+        ...mapActions({
+            persistsTin: "table_configurations/updateTin"
+        }),
+
+        updateTin(value) {
+            this.persistsTin({index: 'column', value})
+        }
+    },
+
+    computed: {
+        tinColumn() {
+            return this.$store.state.table_configurations.tin.column
+        },
+        format: {
+            get() {
+                return this.$store.state.table_configurations.tin.format
+            },
+            set(value) {
+                this.$store.commit("table_configurations/SET_TIN", {index: 'format', value})
+            }
         }
     }
 }

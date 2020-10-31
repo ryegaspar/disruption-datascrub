@@ -1,6 +1,6 @@
 import Excel from 'exceljs/excel'
 
-export const readFile = ({commit, dispatch}, file) => {
+export const readFile = ({commit}, file) => {
 	commit('SET_FILE', file)
 
 	const reader = new FileReader()
