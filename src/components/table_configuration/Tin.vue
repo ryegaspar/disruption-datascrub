@@ -25,7 +25,6 @@
                     <input type="radio"
                            value="text-right"
                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                           name="format"
                            id="text-right"
                            v-model="format"
                     >
@@ -37,7 +36,6 @@
                     <input type="radio"
                            value="text-left"
                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                           name="format"
                            id="text-left"
                            v-model="format"
                     >
@@ -51,7 +49,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     props: {
@@ -64,6 +62,7 @@ export default {
     data() {
         return {
             selected: null,
+            formatName: 'format'
         }
     },
 
@@ -74,16 +73,29 @@ export default {
 
         updateTin(value) {
             this.persistsTin({index: 'column', value})
+        },
+
+        updateFormat(e) {
+            this.$store.commit("table_configurations/SET_TIN", {index: 'format', value: e.target.value})
         }
     },
 
     computed: {
+        ...mapGetters({
+            tinGetter: "table_configurations/tin"
+        }),
+
         tinColumn() {
             return this.$store.state.table_configurations.tin.column
         },
+
+        tinFormat() {
+            return this.tinGetter.format
+        },
+
         format: {
             get() {
-                return this.$store.state.table_configurations.tin.format
+                return (this.tinGetter).format
             },
             set(value) {
                 this.$store.commit("table_configurations/SET_TIN", {index: 'format', value})
