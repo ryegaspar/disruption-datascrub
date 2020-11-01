@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div>TIN</div>
+        <div>{{ header.toUpperCase() }}</div>
         <div class="mt-4">
             <div class="grid gap-y-6 gap-x-4 grid-cols-6">
                 <div class="col-span-2">
                     <label>
                         column value:
                     </label>
-                    <multiselect :value="tinColumn"
+                    <multiselect :value="headerComputed"
                                  :options="headers"
                                  placeholder="select column value"
                                  class="mt-2 -ml-1"
-                                 @input="updateTin"
+                                 @input="updateConfiguration"
                     />
                 </div>
             </div>
@@ -29,7 +29,7 @@
                            v-model="format"
                     >
                     <label for="text-right" class="ml-3">
-                        <span class="block text-sm leading-5 font-medium text-gray-700">Default (Right-9)</span>
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Default (Right-{{ numberOfCharacters }})</span>
                     </label>
                 </div>
                 <div class="mt-2 flex items-center">
@@ -40,7 +40,7 @@
                            v-model="format"
                     >
                     <label for="text-left" class="ml-3">
-                        <span class="block text-sm leading-5 font-medium text-gray-700">Left-9</span>
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Left-{{ numberOfCharacters }}</span>
                     </label>
                 </div>
             </div>
@@ -56,49 +56,47 @@ export default {
         headers: {
             required: true,
             type: Array
+        },
+        header: {
+            required: true,
+            type: String
+        },
+        numberOfCharacters: {
+            required: true,
+            type: Number
         }
     },
 
     data() {
         return {
-            selected: null,
-            formatName: 'format'
         }
     },
 
     methods: {
         ...mapActions({
-            persistsTin: "table_configurations/updateTin"
+            persistsConfiguration: "table_configurations/updateConfiguration"
         }),
 
-        updateTin(value) {
-            this.persistsTin({index: 'column', value})
+        updateConfiguration(value) {
+            this.persistsConfiguration({column: this.header, index: 'header', value})
         },
-
-        updateFormat(e) {
-            this.$store.commit("table_configurations/SET_TIN", {index: 'format', value: e.target.value})
-        }
     },
 
     computed: {
         ...mapGetters({
-            tinGetter: "table_configurations/tin"
+            configurationGetter: "table_configurations/configuration"
         }),
 
-        tinColumn() {
-            return this.$store.state.table_configurations.tin.column
-        },
-
-        tinFormat() {
-            return this.tinGetter.format
+        headerComputed() {
+            return this.configurationGetter(this.header).header
         },
 
         format: {
             get() {
-                return (this.tinGetter).format
+                return this.configurationGetter(this.header).format
             },
             set(value) {
-                this.$store.commit("table_configurations/SET_TIN", {index: 'format', value})
+                this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'format', value})
             }
         }
     }

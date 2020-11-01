@@ -111,7 +111,11 @@
         <hr class="border-b-2 border-gray-900 mt-6 mb-2">
         <div class="text-gray-600">
             <div v-show="selected === 'tin'">
-                <tin :headers="headers"/>
+                <single-value-formatted :headers="headers"
+                                        header="tin"
+                                        :number-of-characters=9
+
+                />
             </div>
             <div v-show="selected === 'npi'">
                 <npi :headers="headers"/>
@@ -129,7 +133,7 @@
     </div>
 </template>
 <script>
-import Tin from '@/components/table_configuration/Tin'
+import SingleValueFormatted from '@/components/table_configuration/SingleValueFormatted'
 import Npi from '@/components/table_configuration/Npi'
 import Facility from '@/components/table_configuration/Facility'
 import Name from '@/components/table_configuration/Name'
@@ -139,7 +143,7 @@ import {mapGetters} from 'vuex'
 
 export default {
     components: {
-        Tin,
+        SingleValueFormatted,
         Npi,
         Facility,
         Name,
