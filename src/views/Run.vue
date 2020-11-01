@@ -22,22 +22,16 @@ export default {
                 return
             }
 
-            try {
-                // const wf = fs.openSync(this.filePath, 'w')
-                // fs.writeSync(wf,"")
-                // if (!wf) {
-                //     throw 'file is currently being used'
-                // }
-                // console.log('file exists and is writable')
-                // fs.close(wf)
-                fs.accessSync(this.filePath,fs.constants.F_OK | fs.constants.W_OK)
-            } catch(e) {
-                if (e.code === "ENOENT") {
-                    console.log("file does not exists")
-                    return
+            fs.open(this.filePath, 'r+', function (err, wf) {
+                if (err && err.code === 'EBUSY') {
+                    console.log('file is busy')
+                } else if (err && err.code === 'ENOENT') {
+                    console.log('file does not exists')
+                } else {
+                    console.log('file is write ready')
+                    fs.close(wf)
                 }
-                console.log("file is readonly")
-            }
+            })
         }
     },
 
