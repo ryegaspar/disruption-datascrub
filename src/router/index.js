@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TableConfiguration from "@/views/TableConfiguration";
+import Run from '@/views/Run'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
 		// component: function () {
 		// 	return import(/* webpackChunkName: "about" */ '../views/About.vue')
 		// }
+	},
+	{
+		path: '/run',
+		name: 'Run',
+		component: Run
 	}
 ]
 

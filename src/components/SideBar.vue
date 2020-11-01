@@ -12,6 +12,10 @@
                                      class="group flex items-center px-2 py-1 leading-normal rounded-md focus:outline-none focus:bg-gray-700 transition ease-in-out duration-300 hover:bg-gray-700 mr-6">
                             Table Configuration
                         </router-link>
+                        <router-link to="/run"
+                                     class="group flex items-center px-2 py-1 leading-normal rounded-md focus:outline-none focus:bg-gray-700 transition ease-in-out duration-300 hover:bg-gray-700 mr-6">
+                            Run
+                        </router-link>
                     </nav>
                 </div>
             </div>
