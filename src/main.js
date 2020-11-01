@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Multiselect from 'vue-multiselect'
+import Swal from 'sweetalert2/src/sweetalert2'
+
+window.Swal = Swal
 
 Vue.config.productionTip = false
 

@@ -62,7 +62,14 @@ export default {
                     })
 
                     if (checkArrayDuplicate(headers)) {
-                        console.log('headers have duplicate values')
+
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'There are duplicate values on the headers',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                        })
+
                         this.$refs.excelFile.value = null
                         return
                     }

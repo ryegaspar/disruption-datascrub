@@ -25,4 +25,5 @@ export default {
 }
 </script>
 
+<style src="@sweetalert2/theme-dark/dark.css"></style>
 <style src="./assets/tailwind.css"></style>
