@@ -1,9 +1,14 @@
 <template>
     <div class="home">
         <div class="flex items-center bg-grey-lighter">
-            <label class="text-gray-800 w-32 flex flex-col items-center py-2 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 cursor-pointer hover:bg-indigo-600">
+            <label
+                class="text-gray-800 w-32 flex flex-col items-center py-2 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 cursor-pointer hover:bg-indigo-600">
                 <span class="text-base leading-normal">select a file</span>
-                <input type='file' class="hidden" @change="readXlsx"/>
+                <input type='file'
+                       class="hidden"
+                       @change="readXlsx"
+                       ref="excelFile"
+                />
             </label>
         </div>
 
@@ -19,7 +24,12 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions, mapMutations} from 'vuex'
+import Excel from 'exceljs/excel'
+
+function checkArrayDuplicate(array) {
+    return new Set(array).size !== array.length
+}
 
 export default {
     methods: {
@@ -27,12 +37,54 @@ export default {
             readExcel: 'excel/readFile'
         }),
 
+        ...mapMutations({
+            setFile: "excel/SET_FILE",
+            setHeaders: "excel/SET_HEADERS",
+            setNumOfRows: "excel/SET_NUM_OF_ROWS",
+            setData: "excel/SET_DATA"
+        }),
+
         readXlsx(obj) {
             if (!obj.target.files) {
                 return
             }
 
-            this.readExcel(obj.target.files[0])
+            const reader = new FileReader()
+            reader.readAsArrayBuffer(obj.target.files[0])
+            reader.onload = () => {
+                const buffer = reader.result
+                const wb = new Excel.Workbook()
+                let headers = []
+
+                wb.xlsx.load(buffer).then(workbook => {
+                    workbook.worksheets[0].getRow(1).eachCell((cell, index) => {
+                        headers.push(cell.value.toLowerCase())
+                    })
+
+                    if (checkArrayDuplicate(headers)) {
+                        console.log('headers have duplicate values')
+                        this.$refs.excelFile.value = null
+                        return
+                    }
+
+                    this.setFile(obj.target.files[0])
+
+                    this.setHeaders(headers)
+
+                    let rowCount = workbook.worksheets[0].rowCount
+                    this.setNumOfRows(rowCount - 1)
+
+                    let data = []
+                    for (let x = 2; x <= rowCount; x++) {
+                        let celldata = {}
+                        workbook.worksheets[0].getRow(x).eachCell({includeEmpty: true}, (cell, index) => {
+                            celldata[headers[index - 1]] = cell.value
+                        })
+                        data.push(celldata)
+                    }
+                    this.setData(data)
+                })
+            }
         },
     },
 
