@@ -1,14 +1,14 @@
 export default {
 	tin: {
-		column: null,
+		header: null,
 		format: 'text-right'
 	},
 	npm: {
-		column: null,
+		header: null,
 		format: 'text-right'
 	},
 	facility: {
-		column: null,
+		header: null,
 		columnFormat: 'fn-ln',
 		fallback: null,
 		fallbackFormat: 'fn-ln',
@@ -16,7 +16,7 @@ export default {
 		ignoreAddress2: true
 	},
 	name: {
-		column: null,
+		header: null,
 		columnFormat: 'fn-ln',
 		fallback: null,
 		fallbackFormat: 'fn-ln',

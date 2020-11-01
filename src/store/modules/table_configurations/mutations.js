@@ -1,3 +1,3 @@
-export const SET_TIN = (state, payload) => {
-	state.tin[payload.index] = payload.value
+export const SET_CONFIGURATION = (state, payload) => {
+	state[payload.column][payload.index] = payload.value
 }

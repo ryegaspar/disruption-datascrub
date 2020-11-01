@@ -1,1 +1,1 @@
-export const tin = (state) => state.tin
+export const configuration = (state) => (column) => { return state[column] }

@@ -3,7 +3,7 @@
         <div class="flex">
             <button
                 class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-indigo-600 mr-2 focus:outline-none"
-                :class="{'bg-green-500': tin.column !== null, 'bg-indigo-400': tin.column === null}"
+                :class="{'bg-green-500': column('tin').header, 'bg-indigo-400': !column('tin').header}"
                 @click.prevent="selected='tin'"
             >
                 TIN
@@ -114,7 +114,7 @@
                 <tin :headers="headers"/>
             </div>
             <div v-show="selected === 'npi'">
-                <npi/>
+                <npi :headers="headers"/>
             </div>
             <div v-show="selected === 'facility'">
                 <facility/>
@@ -155,7 +155,7 @@ export default {
     computed: {
         ...mapGetters({
             headers: 'excel/headers',
-            tin: 'table_configurations/tin'
+            column: 'table_configurations/configuration'
         })
     }
 }
