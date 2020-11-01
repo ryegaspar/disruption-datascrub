@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>{{ header.toUpperCase() }}</div>
+        <div :class="{'text-green-400' : headerComputed !== null }">{{ header.toUpperCase() }}</div>
         <div class="mt-4">
             <div class="grid gap-y-6 gap-x-4 grid-cols-6">
                 <div class="col-span-2">
@@ -28,7 +28,7 @@
                                        v-model="format"
                                 >
                                 <label for="text-right" class="ml-3">
-                                    <span class="block text-sm leading-5 font-medium text-gray-700">Default (Right-{{ numberOfCharacters }})</span>
+                                    <span class="block text-sm leading-5 font-medium text-gray-700">Right-{{ numberOfCharacters }}</span>
                                 </label>
                             </div>
                             <div class="mt-2 flex items-center">

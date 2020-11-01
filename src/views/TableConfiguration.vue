@@ -52,7 +52,8 @@
                 State
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                :class="{'bg-green-400': selected === 'zip' , 'bg-indigo-400': selected !== 'zip'}"
                 @click.prevent="selected='zip'"
             >
                 ZIP
@@ -144,6 +145,12 @@
             </div>
             <div v-show="selected === 'name'">
                 <name/>
+            </div>
+            <div v-show="selected === 'zip'">
+                <single-value-formatted :headers="headers"
+                                        header="zip"
+                                        :number-of-characters=5
+                />
             </div>
             <div v-show="selected === 'network3'">
                 <network3/>

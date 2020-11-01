@@ -1,11 +1,15 @@
 export default {
 	tin: {
 		header: null,
-		format: 'text-right'
+		format: 'text-right',
+		characters: 9,
+		type: String
 	},
 	npi: {
 		header: null,
-		format: 'text-right'
+		format: 'text-right',
+		characters: 10,
+		type: String
 	},
 	facility: {
 		header: null,
@@ -23,4 +27,10 @@ export default {
 		ignore_address: true,
 		ignore_address_2: true
 	},
+	zip: {
+		header: null,
+		format: 'text-left',
+		characters: 5,
+		type: String
+	}
 }
