@@ -27,3 +27,33 @@ export default {
 
 <style src="@sweetalert2/theme-dark/dark.css"></style>
 <style src="./assets/tailwind.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style>
+.multiselect__tag {
+    @apply bg-indigo-400 text-gray-800
+}
+
+.multiselect__input {
+    @apply bg-black text-gray-300
+}
+
+.multiselect__element {
+    @apply text-gray-600
+}
+
+.multiselect__tags {
+    @apply bg-black border-gray-700
+}
+
+.multiselect__single {
+    @apply bg-black text-gray-300
+}
+
+.multiselect__content-wrapper {
+    @apply bg-black border-gray-700
+}
+
+.multiselect__option--selected {
+    @apply bg-indigo-400 text-gray-800
+}
+</style>

@@ -104,30 +104,3 @@ export default {
     }
 }
 </script>
-
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style>
-.multiselect__tag {
-    @apply bg-indigo-400 text-gray-800
-}
-
-.multiselect__input {
-    @apply bg-black text-gray-400
-}
-
-.multiselect__tags {
-    @apply bg-black border-gray-700
-}
-
-.multiselect__single {
-    @apply bg-black text-gray-400
-}
-
-.multiselect__content-wrapper {
-    @apply bg-black border-gray-700
-}
-
-.multiselect__option--selected {
-    @apply bg-indigo-400 text-gray-800
-}
-</style>
