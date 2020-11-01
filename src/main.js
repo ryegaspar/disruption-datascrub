@@ -8,6 +8,12 @@ Vue.config.productionTip = false
 
 Vue.component('multiselect', Multiselect)
 
+Vue.filter('toUpper', (value) => {
+	if (value) return value.toUpperCase()
+
+	return ''
+})
+
 new Vue({
 	router,
 	store,

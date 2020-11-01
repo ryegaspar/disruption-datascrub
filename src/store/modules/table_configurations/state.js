@@ -3,7 +3,7 @@ export default {
 		header: null,
 		format: 'text-right'
 	},
-	npm: {
+	npi: {
 		header: null,
 		format: 'text-right'
 	},
