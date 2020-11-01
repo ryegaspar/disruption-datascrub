@@ -1,8 +1,10 @@
 import Excel from 'exceljs/excel'
 
-export const readFile = ({commit}, file) => {
-	commit('SET_FILE', file)
+function checkArrayDuplicate(array) {
+	return new Set(array).size !== array.length
+}
 
+export const readFile = ({commit}, file) => {
 	const reader = new FileReader()
 	reader.readAsArrayBuffer(file)
 	reader.onload = () => {
@@ -14,6 +16,15 @@ export const readFile = ({commit}, file) => {
 			workbook.worksheets[0].getRow(1).eachCell((cell, index) => {
 				headers.push(cell.value.toLowerCase())
 			})
+
+			if (checkArrayDuplicate(headers)) {
+				console.log('headers have duplicate values')
+				return
+			}
+
+			console.log('headers are good')
+			commit('SET_FILE', file)
+
 			commit('SET_HEADERS', headers)
 
 			let rowCount = workbook.worksheets[0].rowCount
