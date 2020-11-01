@@ -10,24 +10,38 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import fs from 'fs'
 
 export default {
     methods: {
         processFile() {
             if (!this.filePath) {
-                console.log('no file')
+                Swal.fire({
+                    title: 'Error',
+                    text: 'No file defined',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                })
                 return
             }
 
             fs.open(this.filePath, 'r+', function (err, wf) {
                 if (err && err.code === 'EBUSY') {
-                    console.log('file is busy')
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'The file is currently being used by another application',
+                        icon: 'error',
+                        confirmButtonText: 'Ok',
+                    })
                 } else if (err && err.code === 'ENOENT') {
-                    console.log('file does not exists')
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'File not found',
+                        icon: 'error',
+                        confirmButtonText: 'Ok',
+                    })
                 } else {
-                    console.log('file is write ready')
                     fs.close(wf)
                 }
             })
