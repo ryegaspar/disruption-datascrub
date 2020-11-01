@@ -11,12 +11,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import fs from 'fs'
 
 export default {
     methods: {
         processFile() {
-            const fs = require('fs')
-
             if (!this.filePath) {
                 console.log('no file')
                 return
