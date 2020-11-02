@@ -56,4 +56,23 @@ export default {
 .multiselect__option--selected {
     @apply bg-indigo-400 text-gray-800
 }
+
+.swal2-popup {
+    width: 26em;
+    border-radius: 1.5em;
+}
+
+.swal2-icon {
+    margin-top: .5em;
+    margin-bottom: 1.5em;
+}
+
+.swal2-title {
+    font-size: 1.6em;
+}
+
+.swal2-styled {
+    margin: .25em;
+    padding: .5em 2em;
+}
 </style>

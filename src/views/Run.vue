@@ -14,6 +14,14 @@ import {mapGetters} from 'vuex'
 import fs from 'fs'
 
 export default {
+    mounted() {
+        Swal.fire({
+            title: 'Error',
+            text: 'No file defined',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+        })
+    },
     methods: {
         processFile() {
             if (!this.filePath) {
