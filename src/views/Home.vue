@@ -58,7 +58,7 @@ export default {
 
                 wb.xlsx.load(buffer).then(workbook => {
                     workbook.worksheets[0].getRow(1).eachCell((cell, index) => {
-                        headers.push(cell.value.toLowerCase())
+                        headers.push(cell.value.toLowerCase().trim())
                     })
 
                     if (checkArrayDuplicate(headers)) {
