@@ -1,11 +1,20 @@
 <template>
-    <div class="text-gray-400">
-        <button
-            class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 bg-indigo-400 hover:bg-indigo-600 mr-2 focus:outline-none"
-            @click.prevent="processFile"
-        >
-            Run
-        </button>
+    <div>
+        <div class="flex items-center bg-grey-lighter">
+            <button
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 bg-indigo-400 hover:bg-indigo-600 mr-2 focus:outline-none"
+                @click.prevent="processFile"
+            >
+                Run
+            </button>
+        </div>
+
+        <hr class="border-b-2 border-gray-900 mt-20 mb-2">
+        <div class="text-gray-600" v-if="statusText.length > 0">
+
+            <p class="mb-4">Status</p>
+            <p class="text-gray-300" v-for="s in statusText">{{ s }}</p>
+        </div>
     </div>
 </template>
 
@@ -17,7 +26,9 @@ import ColumnFactory from "@/datascrub/columnFactory";
 export default {
     data() {
         return {
-            newData: []
+            newData: [],
+            isBusy: false,
+            statusText: []
         }
     },
 
@@ -58,6 +69,12 @@ export default {
         },
 
         generateData() {
+            this.statusText = []
+            this.isBusy = true
+
+            let message = 'generating data...'
+            this.statusText.push(message)
+
             this.newData = this.tableData.map((item, index) => {
                 let n = new Object()
                 n['id'] = index + 1
@@ -68,6 +85,9 @@ export default {
 
                 return n
             })
+
+            this.statusText[this.statusText.length - 1] = 'generating data....done'
+            this.isBusy = false
         }
     },
 
