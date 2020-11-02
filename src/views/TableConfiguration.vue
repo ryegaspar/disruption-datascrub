@@ -128,14 +128,14 @@
 
         <div class="text-gray-600">
             <div v-show="selected === 'tin'">
-                <single-value-formatted :headers="headers"
+                <string-padded-numbers :headers="headers"
                                         header="tin"
                                         :number-of-characters=9
 
                 />
             </div>
             <div v-show="selected === 'npi'">
-                <single-value-formatted :headers="headers"
+                <string-padded-numbers :headers="headers"
                                         header="npi"
                                         :number-of-characters=10
                 />
@@ -147,7 +147,7 @@
                 <name/>
             </div>
             <div v-show="selected === 'zip'">
-                <single-value-formatted :headers="headers"
+                <string-padded-numbers :headers="headers"
                                         header="zip"
                                         :number-of-characters=5
                 />
@@ -159,7 +159,7 @@
     </div>
 </template>
 <script>
-import SingleValueFormatted from '@/components/table_configuration/SingleValueFormatted'
+import StringPaddedNumbers from '@/components/table_configuration/StringPaddedNumbers'
 import Npi from '@/components/table_configuration/Npi'
 import Facility from '@/components/table_configuration/Facility'
 import Name from '@/components/table_configuration/Name'
@@ -169,7 +169,7 @@ import {mapGetters} from 'vuex'
 
 export default {
     components: {
-        SingleValueFormatted,
+        StringPaddedNumbers,
         Npi,
         Facility,
         Name,

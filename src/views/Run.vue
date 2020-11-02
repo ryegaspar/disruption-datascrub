@@ -12,16 +12,15 @@
 <script>
 import {mapGetters} from 'vuex'
 import fs from 'fs'
+import ColumnFactory from "@/datascrub/columnFactory";
 
 export default {
-    mounted() {
-        Swal.fire({
-            title: 'Error',
-            text: 'No file defined',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-        })
+    data() {
+        return {
+            newData: []
+        }
     },
+
     methods: {
         processFile() {
             if (!this.filePath) {
@@ -33,6 +32,8 @@ export default {
                 })
                 return
             }
+
+            const pfile = this
 
             fs.open(this.filePath, 'r+', function (err, wf) {
                 if (err && err.code === 'EBUSY') {
@@ -51,14 +52,31 @@ export default {
                     })
                 } else {
                     fs.close(wf)
+                    pfile.generateData()
                 }
+            })
+        },
+
+        generateData() {
+            this.newData = this.tableData.map((item, index) => {
+                let n = new Object()
+                n['id'] = index + 1
+
+                this.headersWithValues.forEach((h) => {
+                    return n[h] = (ColumnFactory.createInstance(h, item[this.configurations(h).header])).getFormattedValue()
+                })
+
+                return n
             })
         }
     },
 
     computed: {
         ...mapGetters({
-            filePath: 'excel/filePath'
+            filePath: 'excel/filePath',
+            tableData: 'excel/data',
+            headersWithValues: 'table_configurations/getHeadersWithValues',
+            configurations: 'table_configurations/configuration'
         })
     }
 }
