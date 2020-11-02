@@ -1,15 +1,13 @@
 export default {
 	tin: {
 		header: null,
-		format: 'text-right',
+		direction: 'right',
 		characters: 9,
-		type: String
 	},
 	npi: {
 		header: null,
-		format: 'text-right',
+		direction: 'right',
 		characters: 10,
-		type: String
 	},
 	facility: {
 		header: null,
@@ -29,8 +27,7 @@ export default {
 	},
 	zip: {
 		header: null,
-		format: 'text-left',
+		direction: 'left',
 		characters: 5,
-		type: String
 	}
 }

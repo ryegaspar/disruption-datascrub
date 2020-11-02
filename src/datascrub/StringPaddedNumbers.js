@@ -2,8 +2,8 @@ import store from '@/store'
 
 export default class StringPaddedNumbers {
 	constructor(property, data) {
-		this.property = property // header, "tin"
-		this.data = data // value map from exceldata[0][table_configuration[tin][header]]
+		this.property = property
+		this.data = data
 	}
 
 	configurations() {
@@ -19,7 +19,7 @@ export default class StringPaddedNumbers {
 			value = this.padZero(value)
 		}
 
-		if (this.configurations().format === 'text-right')
+		if (this.configurations().direction === 'right')
 			value = value.split("").reverse().join("").substring(0,9).split("").reverse().join("")
 		else
 			value = value.substring(0,9)

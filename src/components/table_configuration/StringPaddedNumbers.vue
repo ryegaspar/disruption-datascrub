@@ -22,23 +22,23 @@
                         <div class="mt-2">
                             <div class="flex items-center">
                                 <input type="radio"
-                                       value="text-right"
+                                       value="right"
                                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                                       id="text-right"
-                                       v-model="format"
+                                       id="right"
+                                       v-model="direction"
                                 >
-                                <label for="text-right" class="ml-3">
+                                <label for="right" class="ml-3">
                                     <span class="block text-sm leading-5 font-medium text-gray-700">Right-{{ numberOfCharacters }}</span>
                                 </label>
                             </div>
                             <div class="mt-2 flex items-center">
                                 <input type="radio"
-                                       value="text-left"
+                                       value="left"
                                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                                       id="text-left"
-                                       v-model="format"
+                                       id="left"
+                                       v-model="direction"
                                 >
-                                <label for="text-left" class="ml-3">
+                                <label for="left" class="ml-3">
                                     <span class="block text-sm leading-5 font-medium text-gray-700">Left-{{ numberOfCharacters }}</span>
                                 </label>
                             </div>
@@ -69,11 +69,6 @@ export default {
         }
     },
 
-    data() {
-        return {
-        }
-    },
-
     methods: {
         ...mapActions({
             persistsConfiguration: "table_configurations/updateConfiguration"
@@ -93,12 +88,12 @@ export default {
             return this.configurationGetter(this.header).header
         },
 
-        format: {
+        direction: {
             get() {
-                return this.configurationGetter(this.header).format
+                return this.configurationGetter(this.header).direction
             },
             set(value) {
-                this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'format', value})
+                this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'direction', value})
             }
         }
     }
