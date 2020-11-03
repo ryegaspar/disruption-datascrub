@@ -87,16 +87,17 @@ export default {
             })
 
             this.statusText[this.statusText.length - 1] = 'generating data....done'
+
             // this.isBusy = false
             this.writeToExcel()
         },
 
         async writeToExcel() {
             this.isBusy = true
-            this.statusText.push('writing to excel...')
+            this.statusText.push('creating excel...')
 
             let workbook = new Excel.Workbook()
-            let worksheet = workbook.addWorksheet('auto generated')
+            let worksheet = workbook.addWorksheet('Sheet1')
 
             let columns = []
             columns.push({'header': 'ID', 'key': 'id'})
@@ -125,14 +126,11 @@ export default {
             let newFilename = this.filePath.slice(0, -5) + ' - autogen.xlsx'
 
             const stream = fs.createWriteStream(newFilename)
-            workbook.xlsx.write(stream)
-            .then(() => {
-                stream.end()
-                this.statusText[this.statusText.length - 1] = 'writing to excel....done'
-            })
-            .catch(e => {
-                console.error(e.message)
-            })
+            await workbook.xlsx.write(stream)
+            stream.end()
+
+            this.statusText[this.statusText.length - 1] = 'creating excel....done'
+            this.statusText.push('')
         }
     },
 

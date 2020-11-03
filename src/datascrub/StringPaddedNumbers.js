@@ -12,17 +12,18 @@ export default class StringPaddedNumbers {
 
 	getFormattedValue() {
 		let value = this.data
+		let numOfCharacters = this.configurations().characters;
 
-		value = String(value).trim().replace(/-/g,'')
+		value = String(value).trim().split("-", 1)
 
-		if (value.length < this.configurations().characters) {
+		if (value.length < numOfCharacters) {
 			value = this.padZero(value)
 		}
 
 		if (this.configurations().direction === 'right')
-			value = value.split("").reverse().join("").substring(0,9).split("").reverse().join("")
+			value = value.split("").reverse().join("").substring(0,numOfCharacters).split("").reverse().join("")
 		else
-			value = value.substring(0,9)
+			value = value.substring(0,numOfCharacters)
 
 		return value
 	}
