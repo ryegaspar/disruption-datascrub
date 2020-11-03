@@ -25,7 +25,7 @@
 
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex'
-import Excel from 'exceljs/excel'
+import * as Excel from 'exceljs/excel'
 
 function checkArrayDuplicate(array) {
     return new Set(array).size !== array.length

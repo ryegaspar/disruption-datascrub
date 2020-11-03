@@ -21,6 +21,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import fs from 'fs'
+import * as Excel from 'exceljs'
 import ColumnFactory from "@/datascrub/columnFactory";
 
 export default {
@@ -72,8 +73,7 @@ export default {
             this.statusText = []
             this.isBusy = true
 
-            let message = 'generating data...'
-            this.statusText.push(message)
+            this.statusText.push('generating data...')
 
             this.newData = this.tableData.map((item, index) => {
                 let n = new Object()
@@ -87,7 +87,52 @@ export default {
             })
 
             this.statusText[this.statusText.length - 1] = 'generating data....done'
-            this.isBusy = false
+            // this.isBusy = false
+            this.writeToExcel()
+        },
+
+        async writeToExcel() {
+            this.isBusy = true
+            this.statusText.push('writing to excel...')
+
+            let workbook = new Excel.Workbook()
+            let worksheet = workbook.addWorksheet('auto generated')
+
+            let columns = []
+            columns.push({'header': 'ID', 'key': 'id'})
+
+            this.headersWithValues.forEach((h) => {
+                let o = new Object()
+                o['header'] = h.toUpperCase()
+                o['key'] = h
+                columns.push(o)
+            })
+
+            worksheet.columns = columns
+            worksheet.columns.forEach(column => {
+                column.width = column.header.length < 12 ? 12 : column.header.length
+            })
+
+            this.newData.forEach((e, index) => {
+                const rowIndex = index + 2
+
+                worksheet.addRow({
+                    ...e
+                })
+            })
+            worksheet.state = 'visible'
+
+            let newFilename = this.filePath.slice(0, -5) + ' - autogen.xlsx'
+
+            const stream = fs.createWriteStream(newFilename)
+            workbook.xlsx.write(stream)
+            .then(() => {
+                stream.end()
+                this.statusText[this.statusText.length - 1] = 'writing to excel....done'
+            })
+            .catch(e => {
+                console.error(e.message)
+            })
         }
     },
 
