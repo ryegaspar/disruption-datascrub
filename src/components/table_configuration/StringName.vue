@@ -7,40 +7,45 @@
                     <label>
                         column value:
                     </label>
-                    <multiselect :value="headerComputed"
-                                 :options="headers"
+                    <multiselect :options="headers"
                                  placeholder="select column value"
                                  class="mt-2 -ml-1"
                                  :multiple="true"
-                                 @input="updateConfiguration"
+                                 :searchable="false"
+                                 :value="headerComputed"
+                                 @input="updateHeader"
                     />
                 </div>
                 <div class="col-span-2">
                     <label>
-                        operation:
+                        value operation:
+                    </label>
+                    <div class="mt-4">
+                        <check-box :label="valueIsConcatLabel"
+                                   :status="valueIsConcat"
+                                   @toggleStatus="toggleIsConcat"
+                        />
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <label>
+                        value format:
                     </label>
                     <div class="mt-2">
-                        <div class="flex items-center">
-                            <input type="radio"
-                                   value="right"
-                                   class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                                   id="right"
-                            >
-                            <label for="right" class="ml-3">
-                                <span class="block text-sm leading-5 font-medium text-gray-700">Concatenate</span>
-                            </label>
-                        </div>
-                        <div class="mt-2 flex items-center">
-                            <input type="radio"
-                                   value="left"
-                                   class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                                   id="left"
-                            >
-                            <label for="left" class="ml-3">
-                                <span
-                                    class="block text-sm leading-5 font-medium text-gray-700">Process Individually</span>
-                            </label>
-                        </div>
+                        <multiselect placeholder="select column format"
+                                     class="mt-2 -ml-1"
+                                     :options="valueFormats"
+                                     :allow-empty="false"
+                                     :preselect-first="true"
+                                     label="description"
+                                     track-by="value"
+                                     :searchable="false"
+                                     deselect-label=""
+                                     :disabled="valueFormatStatus"
+                                     :value="valueFormatSelected"
+                                     @input="updateValueFormat"
+                        >
+                        </multiselect>
                     </div>
                 </div>
             </div>
@@ -51,9 +56,7 @@
                     <legend class="">
                         format:
                     </legend>
-                    <div class="mt-2">
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -62,6 +65,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
+import CheckBox from "@/components/forms/CheckBox";
 
 export default {
     props: {
@@ -75,16 +79,62 @@ export default {
         },
     },
 
+    components: {
+        CheckBox
+    },
+
+    data() {
+        return {
+            valueFormats: [
+                {
+                    description: 'standard (firstname lastname)',
+                    value: 'fn-ln'
+                },
+                {
+                    description: 'lastname, firstname',
+                    value: 'ln-fn'
+                }
+            ],
+        }
+    },
+
     methods: {
         ...mapActions({
             persistsConfiguration: "table_configurations/updateConfiguration"
         }),
 
-        updateConfiguration(value) {
+        updateHeader(value) {
             if (value.length === 0)
                 value = null
+
             this.persistsConfiguration({column: this.header, index: 'header', value})
+
+            if (this.headerComputed && this.headerComputed.length < 2)
+                this.$store.commit("table_configurations/SET_CONFIGURATION", {
+                    column: this.header,
+                    index: 'valueIsConcat',
+                    value: false
+                })
         },
+
+        updateValueFormat(value) {
+            this.$store.commit("table_configurations/SET_CONFIGURATION", {
+                column: this.header,
+                index: 'valueFormat',
+                value: value.value
+            })
+        },
+
+        toggleIsConcat() {
+            if (this.headerComputed && this.headerComputed.length > 1) {
+                let value = !this.valueIsConcat
+                this.$store.commit("table_configurations/SET_CONFIGURATION", {
+                    column: this.header,
+                    index: 'valueIsConcat',
+                    value
+                })
+            }
+        }
     },
 
     computed: {
@@ -96,6 +146,38 @@ export default {
             return this.configurationGetter(this.header).header
         },
 
+        valueIsConcatLabel() {
+            if (this.valueIsConcat)
+                return 'concatenate values'
+            else
+                return 'process columns individually'
+        },
+
+        valueIsConcat() {
+            return this.configurationGetter(this.header).valueIsConcat
+        },
+
+        valueFormat() {
+            return this.configurationGetter(this.header).valueFormat
+        },
+
+        valueFormatSelected() {
+            return this.valueFormats.filter(o => o.value === this.valueFormat)
+        },
+
+        valueFormatStatus() {
+            if (this.headerComputed === null || this.headerComputed.length > 1) {
+                this.$store.commit("table_configurations/SET_CONFIGURATION", {
+                    column: this.header,
+                    index: 'valueFormat',
+                    value: 'fn-ln'
+                })
+                return true
+            }
+
+            return false
+        }
+
         // direction: {
         //     get() {
         //         return this.configurationGetter(this.header).direction
@@ -105,5 +187,6 @@ export default {
         //     }
         // }
     }
+    ,
 }
 </script>

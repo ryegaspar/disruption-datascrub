@@ -11,7 +11,8 @@ export default {
 	},
 	facility: {
 		header: null,
-		columnFormat: 'fn-ln',
+		valueIsConcat: false,
+		valueFormat: 'fn-ln',
 		fallback: null,
 		fallbackFormat: 'fn-ln',
 		ignoreAddress: true,

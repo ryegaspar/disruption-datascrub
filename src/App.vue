@@ -57,6 +57,14 @@ export default {
     @apply bg-indigo-400 text-gray-800
 }
 
+.multiselect--disabled {
+    @apply opacity-50 rounded-lg
+}
+
+.multiselect--disabled .multiselect__select {
+    @apply bg-black
+}
+
 .swal2-popup {
     width: 26em;
     border-radius: 1.5em;
