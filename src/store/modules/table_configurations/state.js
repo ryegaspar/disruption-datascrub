@@ -22,11 +22,14 @@ export default {
 	},
 	name: {
 		header: null,
-		columnFormat: 'fn-ln',
+		valueIsConcat: false,
+		valueFormat: 'fn-ln',
 		fallback: null,
+		fallbackIsConcat: false,
 		fallbackFormat: 'fn-ln',
-		ignore_address: true,
-		ignore_address_2: true
+		isName: true,
+		ignoreAddress: true,
+		ignoreAddress2: true
 	},
 	zip: {
 		header: null,

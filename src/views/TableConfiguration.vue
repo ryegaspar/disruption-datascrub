@@ -23,7 +23,8 @@
                 Facility
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                :class="{'bg-green-400': selected === 'name' , 'bg-indigo-400': selected !== 'name'}"
                 @click.prevent="selected='name'"
             >
                 Name
@@ -147,7 +148,9 @@
                 />
             </div>
             <div v-show="selected === 'name'">
-                <name/>
+                <string-name :headers="headers"
+                             header="name"
+                />
             </div>
             <div v-show="selected === 'zip'">
                 <string-padded-numbers :headers="headers"
@@ -164,8 +167,6 @@
 <script>
 import StringPaddedNumbers from '@/components/table_configuration/StringPaddedNumbers'
 import StringName from "@/components/table_configuration/StringName";
-import Npi from '@/components/table_configuration/Npi'
-import Name from '@/components/table_configuration/Name'
 import Network3 from "@/components/table_configuration/Network3";
 
 import {mapGetters} from 'vuex'
@@ -174,8 +175,6 @@ export default {
     components: {
         StringPaddedNumbers,
         StringName,
-        Npi,
-        Name,
         Network3
     },
 
