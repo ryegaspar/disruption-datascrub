@@ -99,27 +99,6 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4">
-            <div class="grid gap-y-6 gap-x-4 grid-cols-6">
-                <div class="col-span-4">
-                    <label>
-                        options:
-                    </label>
-                    <div class="mt-4">
-                        <check-box label="disregard values with address format in `column value`"
-                                   :status="ignoreAddress"
-                                   @toggleStatus="toggleIgnoreAddress"
-                        />
-                    </div>
-                    <div class="mt-2">
-                        <check-box label="disregard values with address 2 format in `column value`"
-                                   :status="ignoreAddress2"
-                                   @toggleStatus="toggleIgnoreAddress2"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -200,16 +179,6 @@ export default {
                 this.setStringNameFallbackIsConcat({index: this.header, value})
             }
         },
-
-        toggleIgnoreAddress() {
-            let value = !this.ignoreAddress
-            this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'ignoreAddress', value})
-        },
-
-        toggleIgnoreAddress2() {
-            let value = !this.ignoreAddress2
-            this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'ignoreAddress2', value})
-        }
     },
 
     computed: {
@@ -296,14 +265,6 @@ export default {
 
             return false
         },
-
-        ignoreAddress() {
-            return this.configurationGetter(this.header).ignoreAddress
-        },
-
-        ignoreAddress2() {
-            return this.configurationGetter(this.header).ignoreAddress2
-        }
     }
 }
 </script>
