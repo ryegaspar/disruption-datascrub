@@ -14,7 +14,9 @@ export default {
 		valueIsConcat: false,
 		valueFormat: 'fn-ln',
 		fallback: null,
+		fallbackIsConcat: false,
 		fallbackFormat: 'fn-ln',
+		isName: false,
 		ignoreAddress: true,
 		ignoreAddress2: true
 	},

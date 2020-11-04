@@ -1,18 +1,18 @@
 <template>
     <div>
-        <div :class="{'text-green-400' : headerComputed !== null }">{{ header.toUpperCase() }}</div>
+        <div :class="{'text-green-400' : valueSelected !== null }">{{ header.toUpperCase() }}</div>
         <div class="mt-4">
             <div class="grid gap-y-6 gap-x-4 grid-cols-6">
                 <div class="col-span-2">
                     <label>
                         column value:
                     </label>
-                    <multiselect :options="headers"
+                    <multiselect :options="availableValue"
                                  placeholder="select column value"
                                  class="mt-2 -ml-1"
                                  :multiple="true"
                                  :searchable="false"
-                                 :value="headerComputed"
+                                 :value="valueSelected"
                                  @input="updateHeader"
                     />
                 </div>
@@ -23,7 +23,7 @@
                     <div class="mt-4">
                         <check-box :label="valueIsConcatLabel"
                                    :status="valueIsConcat"
-                                   @toggleStatus="toggleIsConcat"
+                                   @toggleStatus="toggleValueIsConcat"
                         />
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="mt-2">
                         <multiselect placeholder="select column format"
                                      class="mt-2 -ml-1"
-                                     :options="valueFormats"
+                                     :options="formats"
                                      :allow-empty="false"
                                      :preselect-first="true"
                                      label="description"
@@ -51,12 +51,72 @@
             </div>
         </div>
         <div class="mt-4">
-            <div>
-                <div class="mt-4">
-                    <legend class="">
-                        format:
-                    </legend>
-
+            <div class="grid gap-y-6 gap-x-4 grid-cols-6">
+                <div class="col-span-2">
+                    <label>
+                        fallback value:
+                    </label>
+                    <multiselect :options="availableFallback"
+                                 placeholder="select column value"
+                                 class="mt-2 -ml-1"
+                                 :multiple="true"
+                                 :searchable="false"
+                                 :value="fallbackSelected"
+                                 @input="updateFallback"
+                    />
+                </div>
+                <div class="col-span-2">
+                    <label>
+                        fallback operation:
+                    </label>
+                    <div class="mt-4">
+                        <check-box :label="fallbackIsConcatLabel"
+                                   :status="fallbackIsConcat"
+                                   @toggleStatus="toggleFallbackIsConcat"
+                        />
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <label>
+                        value format:
+                    </label>
+                    <div class="mt-2">
+                        <multiselect placeholder="select column format"
+                                     class="mt-2 -ml-1"
+                                     :options="formats"
+                                     :allow-empty="false"
+                                     :preselect-first="true"
+                                     label="description"
+                                     track-by="value"
+                                     :searchable="false"
+                                     deselect-label=""
+                                     :disabled="fallbackFormatStatus"
+                                     :value="fallbackFormatSelected"
+                                     @input="updateFallbackFormat"
+                        >
+                        </multiselect>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="grid gap-y-6 gap-x-4 grid-cols-6">
+                <div class="col-span-4">
+                    <label>
+                        options:
+                    </label>
+                    <div class="mt-4">
+                        <check-box label="disregard values with address format in `column value`"
+                                   :status="ignoreAddress"
+                                   @toggleStatus="toggleIgnoreAddress"
+                        />
+                    </div>
+                    <div class="mt-2">
+                        <check-box label="disregard values with address 2 format in `column value`"
+                                   :status="ignoreAddress2"
+                                   @toggleStatus="toggleIgnoreAddress2"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,7 +145,7 @@ export default {
 
     data() {
         return {
-            valueFormats: [
+            formats: [
                 {
                     description: 'standard (firstname lastname)',
                     value: 'fn-ln'
@@ -100,40 +160,55 @@ export default {
 
     methods: {
         ...mapActions({
-            persistsConfiguration: "table_configurations/updateConfiguration"
+            persistsConfiguration: "table_configurations/updateConfiguration",
+            setStringNameHeader: "table_configurations/setStringNameHeader",
+            setStringNameValueIsConcat: "table_configurations/setStringNameValueIsConcat",
+            setStringNameValueFormat: "table_configurations/setStringNameValueFormat",
+            setStringNameFallback: "table_configurations/setStringNameFallback",
+            setStringNameFallbackIsConcat: "table_configurations/setStringNameFallbackIsConcat",
+            setStringNameFallbackFormat: "table_configurations/setStringNameFallbackFormat"
         }),
 
         updateHeader(value) {
-            if (value.length === 0)
-                value = null
-
-            this.persistsConfiguration({column: this.header, index: 'header', value})
-
-            if (this.headerComputed && this.headerComputed.length < 2)
-                this.$store.commit("table_configurations/SET_CONFIGURATION", {
-                    column: this.header,
-                    index: 'valueIsConcat',
-                    value: false
-                })
+            this.setStringNameHeader({index: this.header, value})
         },
 
         updateValueFormat(value) {
-            this.$store.commit("table_configurations/SET_CONFIGURATION", {
-                column: this.header,
-                index: 'valueFormat',
-                value: value.value
-            })
+            this.setStringNameValueFormat({index: this.header, value: value.value})
         },
 
-        toggleIsConcat() {
-            if (this.headerComputed && this.headerComputed.length > 1) {
+        toggleValueIsConcat() {
+            if (this.valueSelected && this.valueSelected.length > 1) {
                 let value = !this.valueIsConcat
-                this.$store.commit("table_configurations/SET_CONFIGURATION", {
-                    column: this.header,
-                    index: 'valueIsConcat',
-                    value
-                })
+
+                this.setStringNameValueIsConcat({index: this.header, value})
             }
+        },
+
+        updateFallback(value) {
+            this.setStringNameFallback({index: this.header, value})
+        },
+
+        updateFallbackFormat(value) {
+            this.setStringNameFallbackFormat({index: this.header, value: value.value})
+        },
+
+        toggleFallbackIsConcat() {
+            if (this.fallbackSelected && this.fallbackSelected.length > 1) {
+                let value = !this.fallbackIsConcat
+
+                this.setStringNameFallbackIsConcat({index: this.header, value})
+            }
+        },
+
+        toggleIgnoreAddress() {
+            let value = !this.ignoreAddress
+            this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'ignoreAddress', value})
+        },
+
+        toggleIgnoreAddress2() {
+            let value = !this.ignoreAddress2
+            this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'ignoreAddress2', value})
         }
     },
 
@@ -142,7 +217,15 @@ export default {
             configurationGetter: "table_configurations/configuration"
         }),
 
-        headerComputed() {
+        availableValue() {
+            return this.headers.filter(i => {
+                if (this.fallbackSelected)
+                    return !this.fallbackSelected.includes(i)
+                return true
+            })
+        },
+
+        valueSelected() {
             return this.configurationGetter(this.header).header
         },
 
@@ -162,31 +245,65 @@ export default {
         },
 
         valueFormatSelected() {
-            return this.valueFormats.filter(o => o.value === this.valueFormat)
+            return this.formats.filter(o => o.value === this.valueFormat)
         },
 
         valueFormatStatus() {
-            if (this.headerComputed === null || this.headerComputed.length > 1) {
-                this.$store.commit("table_configurations/SET_CONFIGURATION", {
-                    column: this.header,
-                    index: 'valueFormat',
-                    value: 'fn-ln'
-                })
+            if (this.valueSelected === null || this.valueSelected.length > 1) {
+                this.setStringNameValueFormat({index: this.header, value: 'fn-ln'})
                 return true
             }
 
             return false
-        }
+        },
 
-        // direction: {
-        //     get() {
-        //         return this.configurationGetter(this.header).direction
-        //     },
-        //     set(value) {
-        //         this.$store.commit("table_configurations/SET_CONFIGURATION", {column: this.header, index: 'direction', value})
-        //     }
-        // }
+        availableFallback() {
+            return this.headers.filter(i => {
+                if (this.valueSelected !== null)
+                    return !this.valueSelected.includes(i)
+                return true
+            })
+        },
+
+        fallbackSelected() {
+            return this.configurationGetter(this.header).fallback
+        },
+
+        fallbackIsConcatLabel() {
+            if (this.fallbackIsConcat)
+                return 'concatenate values'
+            else
+                return 'process columns individually'
+        },
+
+        fallbackIsConcat() {
+            return this.configurationGetter(this.header).fallbackIsConcat
+        },
+
+        fallbackFormat() {
+            return this.configurationGetter(this.header).fallbackFormat
+        },
+
+        fallbackFormatSelected() {
+            return this.formats.filter(o => o.value === this.fallbackFormat)
+        },
+
+        fallbackFormatStatus() {
+            if (this.fallbackSelected === null || this.fallbackSelected.length > 1) {
+                this.setStringNameFallbackFormat({index: this.header, value: 'fn-ln'})
+                return true
+            }
+
+            return false
+        },
+
+        ignoreAddress() {
+            return this.configurationGetter(this.header).ignoreAddress
+        },
+
+        ignoreAddress2() {
+            return this.configurationGetter(this.header).ignoreAddress2
+        }
     }
-    ,
 }
 </script>
