@@ -18,7 +18,7 @@ export function reverseNameToStandard(unformattedName, disregardAddress) {
 }
 
 export function concatenate(data, disregardAddress) {
-	const computed = data.map(i => i.trim()).join(" ").trim().toUpperCase()
+	const computed = makeArray(data).map(i => i.trim()).join(" ").trim().toUpperCase()
 
 	if (disregardAddress && (isAddress(computed) || isAddress2(computed))) {
 		return null
@@ -28,6 +28,7 @@ export function concatenate(data, disregardAddress) {
 }
 
 export function evaluateIndividual(data, disregardAddress) {
+	data = makeArray(data)
 	let value = null
 
 	if (Array.isArray(data)) {
@@ -71,4 +72,8 @@ export function isAddress2(data) {
 	const matches = data.match(address2)
 
 	return matches && matches.length > 0
+}
+
+function makeArray(data) {
+	return (Array.isArray(data) ? data : [data])
 }

@@ -40,7 +40,6 @@ export default class StringName {
 
 		// when VALUE len > 1, and isConcat = true
 		if (value && value.length > 1 && valueIsConcat) {
-			value = Array.isArray(value) ? value : [value]
 			value = OF.concatenate(value, true)
 		}
 
@@ -61,7 +60,6 @@ export default class StringName {
 
 		// when FALLBACK len > 1, and isConcat = true
 		if (!value && fallback && fallback.length > 1 && fallbackIsConcat) {
-			fallback = Array.isArray(fallback) ? fallback : [fallback]
 			value = OF.concatenate(fallback, false)
 		}
 
