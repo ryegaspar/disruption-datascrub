@@ -44,13 +44,15 @@
                 Add 2
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'city' , 'bg-indigo-400': selected !== 'city'}"
                 @click.prevent="selected='city'"
             >
                 City
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'state' , 'bg-indigo-400': selected !== 'state'}"
                 @click.prevent="selected='state'"
             >
                 State
@@ -164,6 +166,16 @@
                                 header="add2"
                 />
             </div>
+            <div v-show="selected === 'city'">
+                <string-simple :headers="headers"
+                               header="city"
+                />
+            </div>
+            <div v-show="selected === 'state'">
+                <string-simple :headers="headers"
+                                header="state"
+                />
+            </div>
             <div v-show="selected === 'zip'">
                 <string-padded-numbers :headers="headers"
                                        header="zip"
@@ -180,6 +192,7 @@
 import StringPaddedNumbers from '@/components/table_configuration/StringPaddedNumbers'
 import StringName from "@/components/table_configuration/StringName";
 import StringAddress from "@/components/table_configuration/StringAddress";
+import StringSimple from "@/components/table_configuration/StringSimple";
 import Network3 from "@/components/table_configuration/Network3";
 
 import {mapGetters} from 'vuex'
@@ -189,6 +202,7 @@ export default {
         StringPaddedNumbers,
         StringName,
         StringAddress,
+        StringSimple,
         Network3
     },
 

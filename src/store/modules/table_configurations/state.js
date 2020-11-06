@@ -39,6 +39,12 @@ export default {
 		header: null,
 		isAddress: false
 	},
+	city: {
+		header: null
+	},
+	state: {
+		header: null
+	},
 	zip: {
 		header: null,
 		direction: 'left',
