@@ -43,6 +43,7 @@ export default {
         }),
 
         updateConfiguration(value) {
+            value = value.length > 0 ? value : null
             this.persistsConfiguration({column: this.header, index: 'header', value})
         },
     },

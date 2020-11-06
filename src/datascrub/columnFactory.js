@@ -1,11 +1,14 @@
 import StringPaddedNumbers from './StringPaddedNumbers'
 import StringName from "@/datascrub/StringName";
+import StringAddress from "@/datascrub/StringAddress";
 
 const COLUMNS = {
 	tin: StringPaddedNumbers,
 	npi: StringPaddedNumbers,
 	facility: StringName,
 	name: StringName,
+	add1: StringAddress,
+	add2: StringAddress,
 	zip: StringPaddedNumbers
 }
 
