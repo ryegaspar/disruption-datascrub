@@ -15,3 +15,12 @@ export const SET_NUM_OF_ROWS = (state, numOfRows) => {
 export const SET_DATA = (state, data) => {
 	state.data = data
 }
+
+export const RESET = state => {
+	state.file = null
+	state.data = []
+	state.filename = ''
+	state.filePath = ''
+	state.headers = []
+	state.dataRows = 0
+}

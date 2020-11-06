@@ -1,2 +1,3 @@
-export const someAction = ({commit}, argument) => {
+export const reset = ({commit}) => {
+	commit('RESET')
 }

@@ -1,15 +1,25 @@
 <template>
     <div class="home">
         <div class="flex items-center bg-grey-lighter">
-            <label
-                class="text-gray-800 w-32 flex flex-col items-center py-2 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 cursor-pointer hover:bg-indigo-600">
-                <span class="text-base leading-normal">select a file</span>
-                <input type='file'
-                       class="hidden"
-                       @change="readXlsx"
-                       ref="excelFile"
-                />
-            </label>
+            <div>
+                <label
+                    class="text-gray-800 w-32 flex flex-col items-center py-2 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 cursor-pointer hover:bg-indigo-600">
+                    <span class="text-base leading-normal">select a file</span>
+                    <input type='file'
+                           class="hidden"
+                           @change="readXlsx"
+                           ref="excelFile"
+                    />
+                </label>
+            </div>
+            <div class="ml-2">
+                <button class="bg-red-400 px-4 py-2 rounded-lg hover:bg-red-500 outline-none focus:outline-none"
+                        @click="resetInput"
+                        v-show="filePath"
+                >
+                    reset file
+                </button>
+            </div>
         </div>
 
         <hr class="border-b-2 border-gray-900 mt-6 mb-2">
@@ -34,7 +44,8 @@ function checkArrayDuplicate(array) {
 export default {
     methods: {
         ...mapActions({
-            readExcel: 'excel/readFile'
+            resetExcel: 'excel/reset',
+            resetConfigurations: 'table_configurations/reset'
         }),
 
         ...mapMutations({
@@ -43,6 +54,20 @@ export default {
             setNumOfRows: "excel/SET_NUM_OF_ROWS",
             setData: "excel/SET_DATA"
         }),
+
+        resetInput() {
+            Swal.fire({
+                title: 'reset',
+                text: 'Are you sure you want to reset?, this action will also reset configurations',
+                showCancelButton: true,
+                confirmButtonText: 'reset'
+            }).then(r => {
+                if (r.isConfirmed) {
+                    this.resetExcel()
+                    this.resetConfigurations()
+                }
+            })
+        },
 
         readXlsx(obj) {
             if (!obj.target.files) {

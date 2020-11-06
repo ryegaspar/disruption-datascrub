@@ -43,3 +43,7 @@ export const setStringNameFallbackIsConcat = ({commit, state}, payload) => {
 export const setStringNameFallbackFormat = ({commit, state}, payload) => {
 	commit("SET_CONFIGURATION", {column: payload.index, index: 'fallbackFormat', value: payload.value})
 }
+
+export const reset = ({commit}) => {
+	commit('RESET')
+}
