@@ -1,6 +1,7 @@
-import StringPaddedNumbers from './StringPaddedNumbers'
+import StringPaddedNumbers from '@/datascrub/StringPaddedNumbers'
 import StringName from "@/datascrub/StringName";
 import StringAddress from "@/datascrub/StringAddress";
+import StringSimple from "@/datascrub/StringSimple";
 
 const COLUMNS = {
 	tin: StringPaddedNumbers,
@@ -9,6 +10,8 @@ const COLUMNS = {
 	name: StringName,
 	add1: StringAddress,
 	add2: StringAddress,
+	city: StringSimple,
+	state: StringSimple,
 	zip: StringPaddedNumbers
 }
 

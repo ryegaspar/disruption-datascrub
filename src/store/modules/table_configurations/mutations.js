@@ -27,4 +27,7 @@ export const RESET = (state) => {
 
 	state.add1.header = null
 	state.add2.header = null
+
+	state.city.header = null
+	state.state.header = null
 }

@@ -1,7 +1,6 @@
 import store from '@/store'
-import * as OF from './OutputFormatter'
 
-export default class StringAddress {
+export default class StringSimple {
 	constructor(property, data) {
 		this.property = property
 		this.data = data
@@ -12,9 +11,6 @@ export default class StringAddress {
 	}
 
 	getFormattedValue() {
-		let value = this.data.filter(i => i !== null)
-		let isAddress = this.configurations().isAddress;
-
-		return OF.getAddressFromArray(value, isAddress)
+		return this.data.trim().toUpperCase()
 	}
 }
