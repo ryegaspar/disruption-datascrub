@@ -58,7 +58,7 @@ export default {
         resetInput() {
             Swal.fire({
                 title: 'reset',
-                text: 'Are you sure you want to reset?, this action will also reset configurations',
+                text: 'Are you sure you want to reset? This action will also reset configurations',
                 showCancelButton: true,
                 confirmButtonText: 'reset'
             }).then(r => {

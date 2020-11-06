@@ -2,41 +2,43 @@
     <div class="home">
         <div class="flex">
             <button
-                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
                 :class="{'bg-green-400': selected === 'tin' , 'bg-indigo-400': selected !== 'tin'}"
                 @click.prevent="selected='tin'"
             >
                 TIN
             </button>
             <button
-                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
                 :class="{'bg-green-400': selected === 'npi' , 'bg-indigo-400': selected !== 'npi'}"
                 @click.prevent="selected='npi'"
             >
                 NPI
             </button>
             <button
-                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
                 :class="{'bg-green-400': selected === 'facility' , 'bg-indigo-400': selected !== 'facility'}"
                 @click.prevent="selected='facility'"
             >
                 Facility
             </button>
             <button
-                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
                 :class="{'bg-green-400': selected === 'name' , 'bg-indigo-400': selected !== 'name'}"
                 @click.prevent="selected='name'"
             >
                 Name
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'add1' , 'bg-indigo-400': selected !== 'add1'}"
                 @click.prevent="selected='add1'"
             >
                 Add 1
             </button>
             <button
-                class="text-gray-800 flex px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'add2' , 'bg-indigo-400': selected !== 'add2'}"
                 @click.prevent="selected='add2'"
             >
                 Add 2
@@ -152,6 +154,16 @@
                              header="name"
                 />
             </div>
+            <div v-show="selected === 'add1'">
+                <string-address :headers="headers"
+                                header="add1"
+                />
+            </div>
+            <div v-show="selected === 'add2'">
+                <string-address :headers="headers"
+                                header="add2"
+                />
+            </div>
             <div v-show="selected === 'zip'">
                 <string-padded-numbers :headers="headers"
                                        header="zip"
@@ -167,6 +179,7 @@
 <script>
 import StringPaddedNumbers from '@/components/table_configuration/StringPaddedNumbers'
 import StringName from "@/components/table_configuration/StringName";
+import StringAddress from "@/components/table_configuration/StringAddress";
 import Network3 from "@/components/table_configuration/Network3";
 
 import {mapGetters} from 'vuex'
@@ -175,6 +188,7 @@ export default {
     components: {
         StringPaddedNumbers,
         StringName,
+        StringAddress,
         Network3
     },
 

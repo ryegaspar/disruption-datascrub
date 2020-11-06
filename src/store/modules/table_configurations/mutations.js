@@ -24,4 +24,7 @@ export const RESET = (state) => {
 	state.name.fallback = null
 	state.name.fallbackIsConcat = false
 	state.name.fallbackFormat = 'fn-ln'
+
+	state.add1.header = null
+	state.add2.header = null
 }

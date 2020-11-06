@@ -31,6 +31,14 @@ export default {
 		ignoreAddress: true,
 		ignoreAddress2: true
 	},
+	add1: {
+		header: null,
+		isAddress: true
+	},
+	add2: {
+		header: null,
+		isAddress: false
+	},
 	zip: {
 		header: null,
 		direction: 'left',
