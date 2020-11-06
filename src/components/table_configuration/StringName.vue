@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-span-2">
                     <label>
-                        value format:
+                        fallback format:
                     </label>
                     <div class="mt-2">
                         <multiselect placeholder="select column format"
@@ -96,6 +96,15 @@
                         >
                         </multiselect>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="grid gap-y-6 gap-x-4 grid-cols-6">
+                <div class="col-span-6">
+                    <h4 class="text-gray-300">Note</h4>
+                    <p>&bull; primary values disregards values if in the address/address2 format</p>
+                    <p>&bull; fallback values will not disregard address/address2 format</p>
                 </div>
             </div>
         </div>

@@ -11,7 +11,6 @@
 
         <hr class="border-b-2 border-gray-900 mt-20 mb-2">
         <div class="text-gray-600" v-if="statusText.length > 0">
-
             <p class="mb-4">Status</p>
             <p class="text-gray-300" v-for="s in statusText">{{ s }}</p>
         </div>
@@ -22,7 +21,7 @@
 import {mapGetters} from 'vuex'
 import fs from 'fs'
 import * as Excel from 'exceljs'
-import ColumnFactory from "@/datascrub/columnFactory";
+import ColumnFactory from "@/datascrub/columnFactory"
 
 export default {
     data() {
@@ -80,7 +79,20 @@ export default {
                 n['id'] = index + 1
 
                 this.headersWithValues.forEach((h) => {
-                    return n[h] = (ColumnFactory.createInstance(h, item[this.configurations(h).header])).getFormattedValue()
+                    let header = null
+                    let fallback = null
+
+                    if (Array.isArray(this.configurations(h).header))
+                        header = this.configurations(h).header.map(i => item[i])
+                    else
+                        header = item[this.configurations(h).header]
+
+                    if (this.configurations(h).hasOwnProperty('fallback')) {
+                        if (this.configurations(h).fallback)
+                            fallback = this.configurations(h).fallback.map(i => item[i])
+                    }
+
+                    return n[h] = (ColumnFactory.createInstance(h, header, fallback)).getFormattedValue()
                 })
 
                 return n
@@ -88,8 +100,9 @@ export default {
 
             this.statusText[this.statusText.length - 1] = 'generating data....done'
 
+            console.log(this.newData)
             // this.isBusy = false
-            this.writeToExcel()
+            // this.writeToExcel()
         },
 
         async writeToExcel() {
