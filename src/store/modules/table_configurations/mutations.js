@@ -30,4 +30,9 @@ export const RESET = (state) => {
 
 	state.city.header = null
 	state.state.header = null
+
+	state.claims.header = null
+	state.claimants.header = null
+	state.procedures.header = null
+	state.billed.header = null
 }

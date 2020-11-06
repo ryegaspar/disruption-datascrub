@@ -45,6 +45,18 @@ export default {
 	state: {
 		header: null
 	},
+	claims: {
+		header: null
+	},
+	claimants: {
+		header: null
+	},
+	procedures: {
+		header: null
+	},
+	billed: {
+		header: null
+	},
 	zip: {
 		header: null,
 		direction: 'left',

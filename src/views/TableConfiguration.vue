@@ -58,14 +58,15 @@
                 State
             </button>
             <button
-                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
                 :class="{'bg-green-400': selected === 'zip' , 'bg-indigo-400': selected !== 'zip'}"
                 @click.prevent="selected='zip'"
             >
                 ZIP
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'claims' , 'bg-indigo-400': selected !== 'claims'}"
                 @click.prevent="selected='claims'"
             >
                 Claims
@@ -73,19 +74,22 @@
         </div>
         <div class="flex mt-3">
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'claimants' , 'bg-indigo-400': selected !== 'claimants'}"
                 @click.prevent="selected='claimants'"
             >
                 Claimants
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'procedures' , 'bg-indigo-400': selected !== 'procedures'}"
                 @click.prevent="selected='procedures'"
             >
                 Procedures
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'billed' , 'bg-indigo-400': selected !== 'billed'}"
                 @click.prevent="selected='billed'"
             >
                 Billed
@@ -180,6 +184,26 @@
                 <string-padded-numbers :headers="headers"
                                        header="zip"
                                        :number-of-characters=5
+                />
+            </div>
+            <div v-show="selected === 'claims'">
+                <simple-select :headers="headers"
+                               header="claims"
+                />
+            </div>
+            <div v-show="selected === 'claimants'">
+                <simple-select :headers="headers"
+                               header="claimants"
+                />
+            </div>
+            <div v-show="selected === 'procedures'">
+                <simple-select :headers="headers"
+                               header="procedures"
+                />
+            </div>
+            <div v-show="selected === 'billed'">
+                <simple-select :headers="headers"
+                               header="billed"
                 />
             </div>
             <div v-show="selected === 'network3'">
