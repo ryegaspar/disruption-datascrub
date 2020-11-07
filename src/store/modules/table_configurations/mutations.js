@@ -38,4 +38,11 @@ export const RESET = (state) => {
 	state.billed.header = null
 
 	state.ada_code.header = null
+
+	state.network1.header = null
+	state.network1.yesValues = []
+	state.network2.header = null
+	state.network2.yesValues = []
+	state.network3.header = null
+	state.network3.yesValues = []
 }

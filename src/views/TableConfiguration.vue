@@ -102,19 +102,22 @@
                 ADA Code
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'network1' , 'bg-indigo-400': selected !== 'network1'}"
                 @click.prevent="selected='network1'"
             >
                 Network 1
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'network2' , 'bg-indigo-400': selected !== 'network2'}"
                 @click.prevent="selected='network2'"
             >
                 Network 2
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'network3' , 'bg-indigo-400': selected !== 'network3'}"
                 @click.prevent="selected='network3'"
             >
                 Network 3
@@ -212,8 +215,20 @@
                           header="ada_code"
                 />
             </div>
+            <div v-show="selected === 'network1'">
+                <network :headers="headers"
+                          header="network1"
+                />
+            </div>
+            <div v-show="selected === 'network2'">
+                <network :headers="headers"
+                          header="network2"
+                />
+            </div>
             <div v-show="selected === 'network3'">
-                <network3/>
+                <network :headers="headers"
+                          header="network3"
+                />
             </div>
         </div>
     </div>
@@ -224,7 +239,7 @@ import StringName from "@/components/table_configuration/StringName"
 import StringAddress from "@/components/table_configuration/StringAddress"
 import SimpleSelect from "@/components/table_configuration/SimpleSelect"
 import AdaCode from "@/components/table_configuration/AdaCode"
-import Network3 from "@/components/table_configuration/Network3"
+import Network from "@/components/table_configuration/Network"
 
 import {mapGetters} from 'vuex'
 
@@ -235,7 +250,7 @@ export default {
         StringAddress,
         SimpleSelect,
         AdaCode,
-        Network3
+        Network
     },
 
     data() {

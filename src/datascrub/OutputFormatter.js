@@ -3,7 +3,6 @@ const address2 = /(?:SUITE|STE|APARTMENT|APT|ROOM|RM|BUILDING|BLDG|BLD|UNIT|PO|P
 const middleInitial = /^([A-Z]{3,40})(?:\s+[A-Z]\.?\s+)([A-Z]{2,40})/i
 const notANameCharacter = /[^A-Z\s\-]/i
 const nameSuffix = /[ ]+(?:JR|JUNIOR|SR|SENIOR|III|II|IV|DDS|DMD|MSD|PC|MS)/i
-const hash = /[#][ ]?/
 
 export function padZero(n, characterWidth) {
 	n = n + ''
@@ -67,7 +66,7 @@ export function getAddressFromArray(data, isAddressParam) {
 		}
 
 		if (!isAddressParam && isAddress2(item)) {
-			value = getAddress2(item).replace(hash, "STE ")
+			value = getAddress2(item).replace(/[#][ ]?/, "STE ")
 			break;
 		}
 	}

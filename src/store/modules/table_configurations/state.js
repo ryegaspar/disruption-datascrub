@@ -65,5 +65,17 @@ export default {
 	ada_code: {
 		header: null,
 		isNumber: true
+	},
+	network1: {
+		header: null,
+		yesValues: []
+	},
+	network2: {
+		header: null,
+		yesValues: []
+	},
+	network3: {
+		header: null,
+		yesValues: []
 	}
 }
