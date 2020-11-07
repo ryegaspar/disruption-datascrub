@@ -98,7 +98,7 @@ export default {
                 return n
             })
 
-            this.statusText[this.statusText.length - 1] = 'generating data....done'
+            this.$set(this.statusText, this.statusText.length - 1, 'generating data....done')
 
             console.log(this.newData)
             // this.isBusy = false
@@ -142,8 +142,7 @@ export default {
             await workbook.xlsx.write(stream)
             stream.end()
 
-            this.statusText[this.statusText.length - 1] = 'creating excel....done'
-            this.statusText.push('')
+            this.$set(this.statusText, this.statusText.length - 1, 'creating excel....done')
         }
     },
 
