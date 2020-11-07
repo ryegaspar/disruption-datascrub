@@ -158,34 +158,34 @@ export default {
         }),
 
         updateHeader(value) {
-            this.setStringNameHeader({index: this.header, value})
+            this.setStringNameHeader({column: this.header, value})
         },
 
         updateValueFormat(value) {
-            this.setStringNameValueFormat({index: this.header, value: value.value})
+            this.setStringNameValueFormat({column: this.header, value: value.value})
         },
 
         toggleValueIsConcat() {
             if (this.valueSelected && this.valueSelected.length > 1) {
                 let value = !this.valueIsConcat
 
-                this.setStringNameValueIsConcat({index: this.header, value})
+                this.setStringNameValueIsConcat({column: this.header, value})
             }
         },
 
         updateFallback(value) {
-            this.setStringNameFallback({index: this.header, value})
+            this.setStringNameFallback({column: this.header, value})
         },
 
         updateFallbackFormat(value) {
-            this.setStringNameFallbackFormat({index: this.header, value: value.value})
+            this.setStringNameFallbackFormat({column: this.header, value: value.value})
         },
 
         toggleFallbackIsConcat() {
             if (this.fallbackSelected && this.fallbackSelected.length > 1) {
                 let value = !this.fallbackIsConcat
 
-                this.setStringNameFallbackIsConcat({index: this.header, value})
+                this.setStringNameFallbackIsConcat({column: this.header, value})
             }
         },
     },
@@ -228,7 +228,7 @@ export default {
 
         valueFormatStatus() {
             if (this.valueSelected === null || this.valueSelected.length > 1) {
-                this.setStringNameValueFormat({index: this.header, value: 'fn-ln'})
+                this.setStringNameValueFormat({column: this.header, value: 'fn-ln'})
                 return true
             }
 
@@ -268,7 +268,7 @@ export default {
 
         fallbackFormatStatus() {
             if (this.fallbackSelected === null || this.fallbackSelected.length > 1) {
-                this.setStringNameFallbackFormat({index: this.header, value: 'fn-ln'})
+                this.setStringNameFallbackFormat({column: this.header, value: 'fn-ln'})
                 return true
             }
 

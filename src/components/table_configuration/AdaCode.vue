@@ -80,7 +80,7 @@ export default {
         },
 
         updateIsNumber(value) {
-            this.setAdaCodeIsNumber({index: this.header, value: value.value})
+            this.setAdaCodeIsNumber({column: this.header, value: value.value})
         },
     },
 
