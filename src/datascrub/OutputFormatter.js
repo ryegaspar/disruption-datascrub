@@ -15,7 +15,8 @@ export function reverseNameToStandard(unformattedName, disregardAddress) {
 	if (disregardAddress && (isAddress(unformattedName[0]) || isAddress2(unformattedName[0])))
 		return null
 
-	unformattedName = unformattedName[0].split(',')
+	unformattedName = unformattedName[0].split(',').map(i => i.trim())
+
 	let name = unformattedName.slice(1)
 	name.push(unformattedName[0])
 
@@ -75,7 +76,6 @@ export function getAddressFromArray(data, isAddressParam) {
 }
 
 export function formatName(data) {
-	console.log('to format name')
 	return data.trim()
 		.toUpperCase()
 		.replace(middleInitial, "$1 $2")
