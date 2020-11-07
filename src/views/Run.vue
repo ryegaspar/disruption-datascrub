@@ -28,7 +28,8 @@ export default {
         return {
             newData: [],
             isBusy: false,
-            statusText: []
+            statusText: [],
+            newFilename: ''
         }
     },
 
@@ -44,9 +45,9 @@ export default {
                 return
             }
 
-            const pfile = this
+            this.newFileName = this.filePath.slice(0, -5) + ' - autogen.xlsx'
 
-            fs.open(this.filePath, 'r+', function (err, wf) {
+            fs.open(this.filePath, 'r+', (err, wf) => {
                 if (err && err.code === 'EBUSY') {
                     Swal.fire({
                         title: 'Error',
@@ -54,16 +55,9 @@ export default {
                         icon: 'error',
                         confirmButtonText: 'Ok',
                     })
-                } else if (err && err.code === 'ENOENT') {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'File not found',
-                        icon: 'error',
-                        confirmButtonText: 'Ok',
-                    })
                 } else {
-                    fs.close(wf)
-                    pfile.generateData()
+                    // fs.close(wf)
+                    this.generateData()
                 }
             })
         },
@@ -100,9 +94,9 @@ export default {
 
             this.$set(this.statusText, this.statusText.length - 1, 'generating data....done')
 
-            console.log(this.newData)
-            // this.isBusy = false
-            // this.writeToExcel()
+            // console.log(this.newData)
+            this.isBusy = false
+            this.writeToExcel()
         },
 
         async writeToExcel() {
@@ -136,9 +130,7 @@ export default {
             })
             worksheet.state = 'visible'
 
-            let newFilename = this.filePath.slice(0, -5) + ' - autogen.xlsx'
-
-            const stream = fs.createWriteStream(newFilename)
+            const stream = fs.createWriteStream(this.newFilename)
             await workbook.xlsx.write(stream)
             stream.end()
 
