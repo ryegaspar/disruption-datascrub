@@ -44,6 +44,10 @@ export const setStringNameFallbackFormat = ({commit, state}, payload) => {
 	commit("SET_CONFIGURATION", {column: payload.index, index: 'fallbackFormat', value: payload.value})
 }
 
+export const setAdaCodeIsNumber = ({commit, state}, payload) => {
+	commit("SET_CONFIGURATION", {column: payload.index, index: 'isNumber', value: payload.value})
+}
+
 export const reset = ({commit}) => {
 	commit('RESET')
 }

@@ -95,8 +95,9 @@
                 Billed
             </button>
             <button
-                class="text-gray-800 px-4 py-1 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
-                @click.prevent="selected='adacode'"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 hover:bg-green-400 mr-2 whitespace-no-wrap focus:outline-none"
+                :class="{'bg-green-400': selected === 'ada_code' , 'bg-indigo-400': selected !== 'ada_code'}"
+                @click.prevent="selected='ada_code'"
             >
                 ADA Code
             </button>
@@ -177,7 +178,7 @@
             </div>
             <div v-show="selected === 'state'">
                 <simple-select :headers="headers"
-                                header="state"
+                               header="state"
                 />
             </div>
             <div v-show="selected === 'zip'">
@@ -206,6 +207,11 @@
                                header="billed"
                 />
             </div>
+            <div v-show="selected === 'ada_code'">
+                <ada-code :headers="headers"
+                          header="ada_code"
+                />
+            </div>
             <div v-show="selected === 'network3'">
                 <network3/>
             </div>
@@ -214,10 +220,11 @@
 </template>
 <script>
 import StringPaddedNumbers from '@/components/table_configuration/StringPaddedNumbers'
-import StringName from "@/components/table_configuration/StringName";
-import StringAddress from "@/components/table_configuration/StringAddress";
-import SimpleSelect from "@/components/table_configuration/SimpleSelect";
-import Network3 from "@/components/table_configuration/Network3";
+import StringName from "@/components/table_configuration/StringName"
+import StringAddress from "@/components/table_configuration/StringAddress"
+import SimpleSelect from "@/components/table_configuration/SimpleSelect"
+import AdaCode from "@/components/table_configuration/AdaCode"
+import Network3 from "@/components/table_configuration/Network3"
 
 import {mapGetters} from 'vuex'
 
@@ -227,6 +234,7 @@ export default {
         StringName,
         StringAddress,
         SimpleSelect,
+        AdaCode,
         Network3
     },
 

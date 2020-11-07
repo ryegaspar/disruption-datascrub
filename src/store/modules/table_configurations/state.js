@@ -45,6 +45,11 @@ export default {
 	state: {
 		header: null
 	},
+	zip: {
+		header: null,
+		direction: 'left',
+		characters: 5,
+	},
 	claims: {
 		header: null
 	},
@@ -57,9 +62,8 @@ export default {
 	billed: {
 		header: null
 	},
-	zip: {
+	ada_code: {
 		header: null,
-		direction: 'left',
-		characters: 5,
+		isNumber: true
 	}
 }
