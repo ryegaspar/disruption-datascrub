@@ -48,6 +48,10 @@ export const setAdaCodeIsNumber = ({commit, state}, payload) => {
 	commit("SET_CONFIGURATION", {column: payload.index, index: 'isNumber', value: payload.value})
 }
 
+export const addNetworkOptions = ({commit, state}, payload) => {
+	commit("ADD_NETWORK_OPTIONS", {column: payload.column, index: 'yesValueOptions', value: payload.value})
+}
+
 export const reset = ({commit}) => {
 	commit('RESET')
 }

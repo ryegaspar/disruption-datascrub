@@ -2,6 +2,10 @@ export const SET_CONFIGURATION = (state, payload) => {
 	state[payload.column][payload.index] = payload.value
 }
 
+export const ADD_NETWORK_OPTIONS = (state, payload) => {
+	state[payload.column][payload.index].push(payload.value)
+}
+
 export const RESET = (state) => {
 	state.tin.header = null
 	state.tin.direction = 'right'
@@ -41,8 +45,13 @@ export const RESET = (state) => {
 
 	state.network1.header = null
 	state.network1.yesValues = []
+	state.network1.yesValueOptions = []
+
 	state.network2.header = null
 	state.network2.yesValues = []
+	state.network2.yesValueOptions = []
+
 	state.network3.header = null
 	state.network3.yesValues = []
+	state.network3.yesValueOptions = []
 }

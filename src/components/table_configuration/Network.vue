@@ -27,7 +27,7 @@
             </div>
             <div class="grid gap-y-6 gap-x-4 grid-cols-6 mt-4">
                 <div class="col-span-3"
-                     v-if="yesValueOptions.length"
+                     v-show="yesValueOptions.length"
                 >
                     <label>
                         yes values:
@@ -66,29 +66,27 @@ export default {
         },
     },
 
-    data() {
-        return {
-            yesValueOptions: []
-        }
-    },
-
     methods: {
         ...mapActions({
-            persistsConfiguration: "table_configurations/updateConfiguration"
+            persistsConfiguration: "table_configurations/updateConfiguration",
+            addNetworkOptions: "table_configurations/addNetworkOptions"
         }),
 
         updateConfiguration(value) {
-            this.yesValueOptions = []
+            this.persistsConfiguration({column: this.header, index: 'yesValueOptions', value : []})
             this.persistsConfiguration({column: this.header, index: 'yesValues', value : []})
             this.persistsConfiguration({column: this.header, index: 'header', value})
         },
 
         getUniqueValues() {
-            this.yesValueOptions = []
+            this.persistsConfiguration({column: this.header, index: 'yesValueOptions', value : []})
+            this.persistsConfiguration({column: this.header, index: 'yesValues', value : []})
+
             this.headerComputed && this.tableData.forEach(i => {
-                let t = i[this.headerComputed].trim().toLowerCase()
-                if (!this.yesValueOptions.includes(t)) {
-                    this.yesValueOptions.push(t)
+                const t = i[this.headerComputed].trim().toLowerCase()
+
+                if (this.yesValueOptions && !this.yesValueOptions.includes(t)) {
+                    this.addNetworkOptions({column: this.header, value: t})
                 }
             })
         },
@@ -111,6 +109,10 @@ export default {
         yesValuesSelected() {
             return this.configurationGetter(this.header).yesValues
         },
+
+        yesValueOptions() {
+            return this.configurationGetter(this.header).yesValueOptions
+        }
     }
 }
 </script>

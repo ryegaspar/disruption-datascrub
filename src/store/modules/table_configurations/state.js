@@ -68,14 +68,17 @@ export default {
 	},
 	network1: {
 		header: null,
-		yesValues: []
+		yesValues: [],
+		yesValueOptions: []
 	},
 	network2: {
 		header: null,
-		yesValues: []
+		yesValues: [],
+		yesValueOptions: []
 	},
 	network3: {
 		header: null,
-		yesValues: []
+		yesValues: [],
+		yesValueOptions: []
 	}
 }
