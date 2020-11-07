@@ -1,8 +1,9 @@
 import StringPaddedNumbers from '@/datascrub/StringPaddedNumbers'
-import StringName from "@/datascrub/StringName";
-import StringAddress from "@/datascrub/StringAddress";
-import StringSimple from "@/datascrub/StringSimple";
-import NumberSimple from "@/datascrub/NumberSimple";
+import StringName from "@/datascrub/StringName"
+import StringAddress from "@/datascrub/StringAddress"
+import StringSimple from "@/datascrub/StringSimple"
+import NumberSimple from "@/datascrub/NumberSimple"
+import AdaCode from "@/datascrub/AdaCode"
 
 const COLUMNS = {
 	tin: StringPaddedNumbers,
@@ -13,11 +14,12 @@ const COLUMNS = {
 	add2: StringAddress,
 	city: StringSimple,
 	state: StringSimple,
+	zip: StringPaddedNumbers,
 	claims: NumberSimple,
 	claimants: NumberSimple,
 	procedures: NumberSimple,
 	billed: NumberSimple,
-	zip: StringPaddedNumbers
+	ada_code: AdaCode
 }
 
 export default class ColumnFactory {

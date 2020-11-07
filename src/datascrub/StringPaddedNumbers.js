@@ -1,4 +1,5 @@
 import store from '@/store'
+import * as OF from '@/datascrub/OutputFormatter'
 
 export default class StringPaddedNumbers {
 	constructor(property, data) {
@@ -17,7 +18,7 @@ export default class StringPaddedNumbers {
 		value = String(value).trim().split("-", 1)
 
 		if (value.length < numOfCharacters) {
-			value = this.padZero(value)
+			value = OF.padZero(value, numOfCharacters)
 		}
 
 		if (this.configurations().direction === 'right')
@@ -26,11 +27,5 @@ export default class StringPaddedNumbers {
 			value = value.substring(0,numOfCharacters)
 
 		return value
-	}
-
-	padZero(n) {
-		n = n + ''
-		let width = this.configurations().characters
-		return new Array(width - n.length + 1).join('0') + n
 	}
 }

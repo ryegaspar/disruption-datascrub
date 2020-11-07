@@ -63,6 +63,7 @@ export default {
                 confirmButtonText: 'reset'
             }).then(r => {
                 if (r.isConfirmed) {
+                    this.$refs.excelFile.value = null
                     this.resetExcel()
                     this.resetConfigurations()
                 }

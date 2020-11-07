@@ -5,6 +5,11 @@ const notANameCharacter = /[^A-Z\s\-]/i
 const nameSuffix = /[ ]+(?:JR|JUNIOR|SR|SENIOR|III|II|IV|DDS|DMD|MSD|PC|MS)/i
 const hash = /[#][ ]?/
 
+export function padZero(n, characterWidth) {
+	n = n + ''
+	return new Array(characterWidth - n.length + 1).join('0') + n
+}
+
 export function reverseNameToStandard(unformattedName, disregardAddress) {
 	unformattedName = unformattedName.map(i => i.toUpperCase())
 
