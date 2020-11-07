@@ -45,21 +45,9 @@ export default {
                 return
             }
 
-            this.newFileName = this.filePath.slice(0, -5) + ' - autogen.xlsx'
+            this.newFilename = this.filePath.slice(0, -5) + ' - autogen.xlsx'
 
-            fs.open(this.filePath, 'r+', (err, wf) => {
-                if (err && err.code === 'EBUSY') {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'The file is currently being used by another application',
-                        icon: 'error',
-                        confirmButtonText: 'Ok',
-                    })
-                } else {
-                    // fs.close(wf)
-                    this.generateData()
-                }
-            })
+            this.generateData()
         },
 
         generateData() {
@@ -99,7 +87,7 @@ export default {
             this.writeToExcel()
         },
 
-        async writeToExcel() {
+        writeToExcel() {
             this.isBusy = true
             this.statusText.push('creating excel...')
 
@@ -117,9 +105,9 @@ export default {
             })
 
             worksheet.columns = columns
-            worksheet.columns.forEach(column => {
-                column.width = column.header.length < 12 ? 12 : column.header.length
-            })
+            // worksheet.columns.forEach(column => {
+            //     column.width = column.header.length < 12 ? 12 : column.header.length
+            // })
 
             this.newData.forEach((e, index) => {
                 const rowIndex = index + 2
@@ -131,10 +119,22 @@ export default {
             worksheet.state = 'visible'
 
             const stream = fs.createWriteStream(this.newFilename)
-            await workbook.xlsx.write(stream)
-            stream.end()
 
-            this.$set(this.statusText, this.statusText.length - 1, 'creating excel....done')
+            stream.on('error', (e) => {
+                Swal.fire({
+                    title: 'Error',
+                    text: `Error: ${e.message}`,
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                })
+            })
+
+            stream.on('ready', async () => {
+                await workbook.xlsx.write(stream)
+                stream.end()
+
+                this.$set(this.statusText, this.statusText.length - 1, 'creating excel....done')
+            })
         }
     },
 
