@@ -2,7 +2,7 @@
     <div id="app">
         <div class="flex overflow-hidden bg-gray-800">
             <div class="flex flex-col w-0 flex-1 overflow-hidden">
-                <div class="flex flex-1 relative bg-black overflow-y-auto focus:outline-none min-h-screen">
+                <div class="flex flex-1 relative bg-black overflow-y-auto focus:outline-none min-h-screen text-gray-500">
                     <side-bar/>
                     <main class="flex-1 pr-4 pl-6 pt-6 w-full overflow-auto bg-black">
                         <keep-alive>
@@ -30,7 +30,7 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 .multiselect__tag {
-    @apply bg-indigo-400 text-gray-800
+    @apply bg-indigo-400 text-gray-600
 }
 
 .multiselect__input {
@@ -42,7 +42,7 @@ export default {
 }
 
 .multiselect__tags {
-    @apply bg-black border-gray-700
+    @apply bg-black border-gray-600
 }
 
 .multiselect__single {
@@ -54,7 +54,7 @@ export default {
 }
 
 .multiselect__option--selected {
-    @apply bg-indigo-400 text-gray-800
+    @apply bg-indigo-400 text-gray-600
 }
 
 .multiselect--disabled {

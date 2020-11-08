@@ -126,13 +126,13 @@
 
         <hr class="border-b-2 border-gray-900 mt-6 mb-2">
 
-        <div class="text-gray-600">
+        <div class="text-gray-300">
             <div>
-                <span class="text-gray-400">Columns with values: </span>
+                <span class="text-gray-500">Columns with values: </span>
                 <span>{{ columnWithValues.join(' | ') | toUpper }}</span>
             </div>
             <div>
-                <span class="text-gray-400"># of columns with values: </span>
+                <span class="text-gray-500"># of columns with values: </span>
                 <span>{{ columnWithValues.length }}</span>
             </div>
 
@@ -140,7 +140,7 @@
 
         <hr class="border-b-2 border-gray-900 mt-2 mb-2">
 
-        <div class="text-gray-600">
+        <div class="">
             <div v-show="selected === 'tin'">
                 <string-padded-numbers :headers="headers"
                                        header="tin"

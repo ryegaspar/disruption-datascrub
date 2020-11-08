@@ -3,7 +3,7 @@
         <div class="flex items-center bg-grey-lighter">
             <div>
                 <label
-                    class="text-gray-800 w-32 flex flex-col items-center py-2 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 cursor-pointer hover:bg-indigo-600">
+                    class="text-gray-800 w-32 flex flex-col items-center py-2 bg-indigo-400 rounded-lg shadow-lg border border-gray-900 cursor-pointer hover:bg-green-400">
                     <span class="text-base leading-normal">select a file</span>
                     <input type='file'
                            class="hidden"
@@ -13,7 +13,7 @@
                 </label>
             </div>
             <div class="ml-2">
-                <button class="bg-red-400 px-4 py-2 rounded-lg hover:bg-red-500 outline-none focus:outline-none"
+                <button class="bg-gray-400 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-600 hover:text-gray-300 outline-none focus:outline-none"
                         @click="resetInput"
                         v-show="filePath"
                 >
@@ -23,7 +23,7 @@
         </div>
 
         <hr class="border-b-2 border-gray-900 mt-6 mb-2">
-        <div class="text-gray-600">
+        <div class="">
             <p class="mb-4">File Info</p>
             <p>Filename: <span class="text-gray-300">{{ filename }}</span></p>
             <p>Path: <span class="text-gray-300">{{ filePath }}</span></p>
