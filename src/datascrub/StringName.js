@@ -25,58 +25,57 @@ export default class StringName {
 		value = value.length === 0 ? null : value
 		fallback = fallback && fallback.length === 0 ? null : fallback
 
-		// when VALUE len = 1, and format = ln-fn
-		if (value && value.length === 1 && valueFormat === 'ln-fn') {
-			value = value.map(i => String(i))
-			value = OF.reverseNameToStandard(value, true)
-		}
+		let output = null
 
-		// when VALUE len = 1, and format = fn-ln
-		if (value && value.length === 1 && valueFormat === 'fn-ln') {
-			if (!OF.isAddress(String(value[0]).trim()) && !OF.isAddress2(String(value[0]).trim()))
+		if (value) {
+			if (value.length === 1 && valueFormat === 'ln-fn') {
+				output = value.map(i => String(i))
+				output = OF.reverseNameToStandard(value, true)
+			}
+
+			if (value.length === 1 && valueFormat === 'fn-ln') {
 				value = String(value[0]).trim()
-			else
-				value = null
+				if (!OF.isAddress(String(value[0]).trim()) && !OF.isAddress2(String(value[0]).trim()))
+					output = String(value[0]).trim()
+				else
+					output = null
+			}
+
+			if (value.length > 1 && valueIsConcat) {
+				output = OF.concatenate(value, true)
+			}
+
+			if (value.length > 1 && !valueIsConcat) {
+				output = OF.evaluateIndividual(value, true)
+			}
 		}
 
-		// when VALUE len > 1, and isConcat = true
-		if (value && value.length > 1 && valueIsConcat) {
-			value = OF.concatenate(value, true)
-		}
+		if (!output && fallback) {
+			if (fallback.length === 1 && fallbackFormat === 'ln-fn') {
+				output = OF.reverseNameToStandard(fallback, false)
+			}
 
-		// when VALUE len > 1, and isConcat = false
-		if (value && value.length > 1 && !valueIsConcat) {
-			value = OF.evaluateIndividual(value, true)
-		}
+			if (fallback.length === 1 && fallbackFormat === 'fn-ln') {
+				output = fallback[0].trim()
+			}
 
-		// when FALLBACK len = 1, and format = ln-fn
-		if (!value && fallback && fallback.length === 1 && fallbackFormat === 'ln-fn') {
-			value = OF.reverseNameToStandard(fallback, false)
-		}
+			if (fallback.length > 1 && fallbackIsConcat) {
+				output = OF.concatenate(fallback, false)
+			}
 
-		// when FALLBACK len = 1, and format = fn-ln
-		if (!value && fallback && fallback.length === 1 && fallbackFormat === 'fn-ln') {
-			value = fallback[0].trim()
-		}
-
-		// when FALLBACK len > 1, and isConcat = true
-		if (!value && fallback && fallback.length > 1 && fallbackIsConcat) {
-			value = OF.concatenate(fallback, false)
-		}
-
-		// when FALLBACK len > 1, and isConcat = false
-		if (!value && fallback && fallback.length > 1 && !fallbackIsConcat) {
-			value = OF.evaluateIndividual(fallback, false)
+			if (fallback.length > 1 && !fallbackIsConcat) {
+				output = OF.evaluateIndividual(fallback, false)
+			}
 		}
 
 		if (isName) {
-			return OF.formatName(value)
+			return OF.formatName(output)
 		}
 
-		if (value) {
-			return value.trim().toUpperCase()
+		if (output) {
+			return String(output).trim().toUpperCase()
 		}
 
-		return value
+		return output
 	}
 }

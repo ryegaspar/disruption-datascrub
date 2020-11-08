@@ -82,9 +82,9 @@ export default {
 
             this.$set(this.statusText, this.statusText.length - 1, 'generating data....done')
 
-            // console.log(this.newData)
+            console.log(this.newData)
             this.isBusy = false
-            this.writeToExcel()
+            // this.writeToExcel()
         },
 
         writeToExcel() {
