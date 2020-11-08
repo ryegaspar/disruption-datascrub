@@ -16,7 +16,9 @@
                                  @input="updateHeader"
                     />
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2"
+                     v-show="valueSelected && valueSelected.length > 1"
+                >
                     <label>
                         value operation:
                     </label>
@@ -27,7 +29,9 @@
                         />
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2"
+                     v-show="valueSelected && valueSelected.length === 1"
+                >
                     <label>
                         value format:
                     </label>
@@ -52,7 +56,7 @@
         </div>
         <div class="mt-4">
             <div class="grid gap-y-6 gap-x-4 grid-cols-6">
-                <div class="col-span-2">
+                <div class="col-span-2" v-show="valueSelected">
                     <label>
                         fallback value:
                     </label>
@@ -65,7 +69,9 @@
                                  @input="updateFallback"
                     />
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2"
+                     v-show="fallbackSelected && fallbackSelected.length > 1"
+                >
                     <label>
                         fallback operation:
                     </label>
@@ -76,7 +82,9 @@
                         />
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2"
+                     v-show="fallbackSelected && fallbackSelected.length === 1"
+                >
                     <label>
                         fallback format:
                     </label>
@@ -103,8 +111,8 @@
             <div class="grid gap-y-6 gap-x-4 grid-cols-6">
                 <div class="col-span-6">
                     <h4 class="text-gray-300">Note</h4>
-                    <p>&bull; primary values disregards values if in the address/address2 format</p>
-                    <p>&bull; fallback values will not disregard address/address2 format</p>
+                    <p>&bull; primary values will disregard values with an address/address2 format</p>
+                    <p>&bull; fallback will not disregard values with an address format</p>
                 </div>
             </div>
         </div>
