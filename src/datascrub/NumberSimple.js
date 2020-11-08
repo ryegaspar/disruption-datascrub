@@ -11,6 +11,6 @@ export default class StringSimple {
 	}
 
 	getFormattedValue() {
-		return Number(this.data)
+		return Number.isNaN(Number(this.data)) ? null : Number(this.data)
 	}
 }

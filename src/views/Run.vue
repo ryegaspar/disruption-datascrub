@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center bg-grey-lighter">
             <button
-                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 bg-indigo-400 hover:bg-indigo-600 mr-2 focus:outline-none"
+                class="text-gray-800 px-4 py-1 rounded-lg shadow-lg border border-gray-900 bg-indigo-400 hover:bg-green-400 mr-2 focus:outline-none"
                 @click.prevent="processFile"
             >
                 Run

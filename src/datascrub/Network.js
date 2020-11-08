@@ -13,6 +13,6 @@ export default class Network {
 	getFormattedValue() {
 		const yesValues = this.configurations().yesValues
 
-		return yesValues.includes(this.data.trim().toLowerCase()) ? 'Y': 'N'
+		return yesValues.includes(String(this.data).trim().toLowerCase()) ? 'Y': 'N'
 	}
 }

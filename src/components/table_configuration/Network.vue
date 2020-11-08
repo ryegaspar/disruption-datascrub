@@ -83,7 +83,7 @@ export default {
             this.persistsConfiguration({column: this.header, index: 'yesValues', value : []})
 
             this.headerComputed && this.tableData.forEach(i => {
-                const t = i[this.headerComputed].trim().toLowerCase()
+                const t = String(i[this.headerComputed]).trim().toLowerCase()
 
                 if (this.yesValueOptions && !this.yesValueOptions.includes(t)) {
                     this.addNetworkOptions({column: this.header, value: t})

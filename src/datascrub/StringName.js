@@ -27,13 +27,14 @@ export default class StringName {
 
 		// when VALUE len = 1, and format = ln-fn
 		if (value && value.length === 1 && valueFormat === 'ln-fn') {
+			value = value.map(i => String(i))
 			value = OF.reverseNameToStandard(value, true)
 		}
 
 		// when VALUE len = 1, and format = fn-ln
 		if (value && value.length === 1 && valueFormat === 'fn-ln') {
-			if (!OF.isAddress(value[0].trim()) && !OF.isAddress2(value[0].trim()))
-				value = value[0].trim()
+			if (!OF.isAddress(String(value[0]).trim()) && !OF.isAddress2(String(value[0]).trim()))
+				value = String(value[0]).trim()
 			else
 				value = null
 		}

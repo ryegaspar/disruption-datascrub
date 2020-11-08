@@ -12,7 +12,7 @@ export default class StringAddress {
 	}
 
 	getFormattedValue() {
-		let value = this.data.filter(i => i !== null)
+		let value = this.data.filter(i => i !== null).map(i => String(i))
 		let isAddress = this.configurations().isAddress;
 
 		return OF.getAddressFromArray(value, isAddress)

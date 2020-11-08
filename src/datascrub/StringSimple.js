@@ -11,6 +11,6 @@ export default class StringSimple {
 	}
 
 	getFormattedValue() {
-		return this.data.trim().toUpperCase()
+		return String(this.data).trim().toUpperCase()
 	}
 }
