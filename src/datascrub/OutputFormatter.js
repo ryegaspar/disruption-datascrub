@@ -1,4 +1,4 @@
-const address = /\d{1,5}[ ](?:[A-Z0-9.-]+[ ]?(?!SUITE|STE|APARTMENT|APT|ROOM|RM|BUILDING|BLDG|BLD|UNIT|PO BOX|P\.O\.[ ]?BOX|#)){1,3}(?:AVENUE|AVE|LANE|LN|ROAD|RD|BOULEVARD|BLDVD|DRIVE|DR|STREET|ST|WOODS|LOOP)\.?(?:[ ](?:NORTH|SOUTH|EAST|WEST|N|E|W|S[^TU]))?/i
+const address = /\d{1,5}[ ]+(?:[A-Z0-9.-]+[ ]+(?!SUITE|STE|APARTMENT|APT|ROOM|RM|BUILDING|BLDG|BLD|UNIT|PO BOX|P\.O\.[ ]BOX|#)){1,3}(?:AVENUE|AVE|LANE|LN|ROAD|RD|BOULEVARD|BLDVD|DRIVE|DR|STREET|ST|WOODS|LOOP)(?:[ ]*(?:NORTH|SOUTH|EAST|WEST|[NEWS])\W)?/i
 const address2 = /(?:(?:SUITE|STE|APARTMENT|APT|ROOM|RM|BUILDING|BLDG|BLD|UNIT|PO BOX|P\.O\.[ ]?BOX|#)\.?[ ][A-Z0-9]{1,5})|(?:#\d{1,5})/i
 const middleInitial = /^([A-Z]{3,40})(?:\s+[A-Z]\.?\s+)([A-Z]{2,40})/i
 const notANameCharacter = /[^A-Z\s\-]/i
